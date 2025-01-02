@@ -94,7 +94,7 @@ MainTab:CreateToggle({
         Callback = function(value)
                 _G.AutoDoughtBoss = value
                 StopTween(_G.AutoDoughtBoss)
-end)
+        end)
 spawn(function()
     while wait() do
         pcall(function()
@@ -380,6 +380,7 @@ spawn(function()
         end
     end
 end)
+})
 MainTab:CreateButton({
     Name = "Buso",
     Callback = function()

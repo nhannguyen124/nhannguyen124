@@ -10,6 +10,11 @@ local Window = Rayfield:CreateWindow({
     },
     KeySystem = false, -- Set to true if you want a key system
 })
+function AutoHaki()
+    if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+    end
+end
 local MainTab = Window:CreateTab("Main", 4483362458) -- Icon ID from Roblox library
 local SettingsTab = Window:CreateTab("Settings", 4483362458)
 -- Adding Sections and Elements to Main Tab
@@ -23,9 +28,7 @@ end
 MainTab:CreateButton({
     Name = "XinChao",
     Callback = function()
-        if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") and Value then
-            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
-        end
+        AutoHaki()
     end,
 })
 MainTab:CreateSlider({

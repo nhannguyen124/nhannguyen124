@@ -29,7 +29,9 @@ MainTab:CreateButton({
 MainTab:CreateToggle({
     Name = "Enable Feature",
     CurrentValue = false,
-    Callback = AutoHaki(CurrentValue)
+    Callback = function()
+            AutoHaki(CurrentValue)
+        end
 })
 
 MainTab:CreateSlider({

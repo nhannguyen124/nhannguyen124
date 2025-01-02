@@ -21,7 +21,11 @@ local SettingsTab = Window:CreateTab("Settings", 4483362458)
 local MainSection = MainTab:CreateSection("Main Functions")
 MainTab:CreateButton({
     Name = "XinChao",
-    Callback = AutoHaki(),
+    Callback = function()
+            if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+            end
+        end
 })
 MainTab:CreateSlider({
     Name = "Adjust Value",

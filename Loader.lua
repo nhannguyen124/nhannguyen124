@@ -145,7 +145,7 @@ MainTab:CreateToggle({
     end,
 })
 MainTab:CreateToggle({
-    Name = "BypassTP",
+    Name = "CakeFarm",
     CurrentValue = false,
     Callback = function()
         if Option == "NoQuest" then

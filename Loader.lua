@@ -71,7 +71,7 @@ MainTab:CreateButton({
             end
         end
 })
-MainTab:Toggle({
+MainTab:CreateToggle({
     Name = "Invisible Monster",
     CurrentValue = false,
     Callback = function(value)

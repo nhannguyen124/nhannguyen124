@@ -16,22 +16,6 @@ function Click()
     game:GetService'VirtualUser':CaptureController()
     game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
 end
-function StopTween(target)
-    if not target then
-        _G.StopTween = true
-        wait()
-        ATween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-        wait()
-        if game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
-            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
-        end
-        _G.StopTween = false
-        _G.Clip = false
-    end
-    if game.Players.LocalPlayer.Character:FindFirstChild('Highlight') then
-        game.Players.LocalPlayer.Character:FindFirstChild('Highlight'):Destroy()
-    end
-end
 function UnEquipWeapon(Weapon)
     if game.Players.LocalPlayer.Character:FindFirstChild(Weapon) then
         _G.NotAutoEquip = true

@@ -27,9 +27,7 @@ local function AutoHaki(Value)
 end
 MainTab:CreateButton({
     Name = "XinChao",
-    Callback = function()
-        AutoHaki()
-    end,
+    Callback = AutoHaki(),
 })
 MainTab:CreateSlider({
     Name = "Adjust Value",

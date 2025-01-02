@@ -30,7 +30,9 @@ MainTab:CreateToggle({
     Name = "Enable Feature",
     CurrentValue = false,
     Callback = function()
-            AutoHaki(CurrentValue)
+            if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
+                game:GetService("VirtualInputManager"):SendKeyEvent(false,"V",false,game)
+            end
         end
 })
 

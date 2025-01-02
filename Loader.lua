@@ -27,28 +27,32 @@ MainTab:CreateToggle({
     Name = "AutoStoreFruit",
     CurrentValue = false,
     Callback = function(Value)
-        if Value then
-            for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-                if v:IsA("Tool") and string.find(v.Name, "Fruit") then
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit",v:GetAttribute("OriginalName"),v)
-                    Load.Text = "Keep Fruit Success"
+            while wait() do
+                if Value then
+                    for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                        if v:IsA("Tool") and string.find(v.Name, "Fruit") then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit",v:GetAttribute("OriginalName"),v)
+                            Load.Text = "Keep Fruit Success"
+                        end
+                    end
+                    for i, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+                        if v:IsA("Tool") and string.find(v.Name, "Fruit") then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit",v:GetAttribute("OriginalName"),v)
+                            Load.Text = "Keep Fruit Success"
+                        end
+                    end
                 end
             end
-            for i, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-                if v:IsA("Tool") and string.find(v.Name, "Fruit") then
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit",v:GetAttribute("OriginalName"),v)
-                    Load.Text = "Keep Fruit Success"
-                end
-            end
-        end
-    end,
+        end,
 })
 MainTab:CreateToggle({
     Name = "AutoBuso",
     CurrentValue = false,
     Callback = function(Value)
-            if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") and Value then
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+            while wait() do
+                if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") and Value then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+                end
             end
         end,
 })

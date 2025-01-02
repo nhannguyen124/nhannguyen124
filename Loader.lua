@@ -19,12 +19,6 @@ local MainTab = Window:CreateTab("Main", 4483362458) -- Icon ID from Roblox libr
 local SettingsTab = Window:CreateTab("Settings", 4483362458)
 -- Adding Sections and Elements to Main Tab
 local MainSection = MainTab:CreateSection("Main Functions")
-local function AutoHaki(Value)
-    if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") and Value then
-        game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
-        print('XinChao')
-    end
-end
 MainTab:CreateButton({
     Name = "XinChao",
     Callback = AutoHaki(),

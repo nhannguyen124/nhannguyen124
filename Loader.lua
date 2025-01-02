@@ -698,6 +698,20 @@ function CheckQuest()
             NameMon = "Isle Champion"
             CFrameQuest = CFrame.new(-16539.078125, 55.68632888793945, 1051.5738525390625)
             CFrameMon = CFrame.new(-16347.4150390625, 92.09503936767578, 1122.335205078125)
+        elseif MyLevel == 2550 or MyLevel <= 2575 then
+            Mon = "Serpent Hunter"
+            LevelQuest = 1
+            NameQuest = "TikiQuest3"
+            NameMon = "Serpent Hunter"
+            CFrameQuest = CFrame.new(-16665.2, 104.596, 1579.69)
+            CFrameMon = CFrame.new(-16602.8, 156.831, 1528.83)
+        elseif MyLevel = 2575 or MyLevel <= 2550 then
+            Mon = "Skull Slayer"
+            LevelQuest = 2
+            NameQuest = "TikiQuest3"
+            NameMon = "Skull Slayer"
+            CFrameQuest = CFrame.new(-16665.2, 104.596, 1579.69)
+            CFrameMon = CFrame.new(-16846.7, 152.811, 1644.17)
         end
     end
 end
@@ -810,7 +824,7 @@ SettingsTab:CreateInput({
     Name = "Enter Text",
     PlaceholderText = "Type here...",
     Callback = function(Pos)
-        print("Input Text:", Pos)
+        Pos = CFrame.new(Pos)
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if game.Players.LocalPlayer.Character.Humanoid.Sit == true then game.Players.LocalPlayer.Character.Humanoid.Sit = false end
             pcall(function() tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/350, Enum.EasingStyle.Linear),{CFrame = Pos}) end)

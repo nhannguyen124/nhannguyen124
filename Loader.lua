@@ -809,8 +809,15 @@ local SettingsSection = SettingsTab:CreateSection("Settings")
 SettingsTab:CreateInput({
     Name = "Enter Text",
     PlaceholderText = "Type here...",
-    Callback = function(Text)
-        print("Input Text:", Text)
-        ATween(Text)
+    Callback = function(Pos)
+        print("Input Text:", Pos)
+        Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+        if game.Players.LocalPlayer.Character.Humanoid.Sit == true then game.Players.LocalPlayer.Character.Humanoid.Sit = false end
+            pcall(function() tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/350, Enum.EasingStyle.Linear),{CFrame = Pos}) end)
+            tween:Play()
+        if Distance <= 350 then
+            tween:Cancel()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
+        end
     end,
 })

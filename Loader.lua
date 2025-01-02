@@ -16,7 +16,7 @@ local SettingsTab = Window:CreateTab("Settings", 4483362458)
 local MainSection = MainTab:CreateSection("Main Functions")
 local function AutoHaki(Value)
     if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") and Value then
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+        game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
     end
 end
 MainTab:CreateButton({

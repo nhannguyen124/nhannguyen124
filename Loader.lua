@@ -196,3 +196,16 @@ SettingsTab:CreateInput({
         end
     end,
 })
+MainTab:CreateToggle({
+        Name = "Auto Random Fruit",
+        CurrentValue = false,
+        Callback = function(Value)
+            local args = {
+                [1] = "Cousin",
+                [2] = "Buy"
+            }
+            while wait() and Value == true do
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            end
+        end,
+    })

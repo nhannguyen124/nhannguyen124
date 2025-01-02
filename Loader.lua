@@ -17,6 +17,7 @@ local MainSection = MainTab:CreateSection("Main Functions")
 local function AutoHaki(Value)
     if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") and Value then
         game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
+        print('XinChao')
     end
 end
 MainTab:CreateButton({

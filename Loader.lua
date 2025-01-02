@@ -1,8 +1,8 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Window = Rayfield:CreateWindow({
-    Name = "Example GUI",
-    LoadingTitle = "Loading Example GUI",
-    LoadingSubtitle = "By YourName",
+    Name = "HackerLoVN",
+    LoadingTitle = "Đợi đi cu",
+    LoadingSubtitle = "By nhannguyen6886",
     ConfigurationSaving = {
         Enabled = true,
         FolderName = nil, -- Use a custom folder name for saving settings
@@ -17,9 +17,9 @@ local SettingsTab = Window:CreateTab("Settings", 4483362458)
 local MainSection = MainTab:CreateSection("Main Functions")
 
 MainTab:CreateButton({
-    Name = "Say Hello",
+    Name = "XinChao",
     Callback = function()
-        print("Hello from Rayfield!")
+        print("XinChao")
     end,
 })
 
@@ -27,8 +27,10 @@ MainTab:CreateToggle({
     Name = "Enable Feature",
     CurrentValue = false,
     Callback = function(Value)
-        print("Feature Enabled:", Value)
-    end,
+        if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") and CurrectValue then
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+        end
+    end
 })
 
 MainTab:CreateSlider({

@@ -60,6 +60,22 @@ function ATween(Pos)
         _G.Clip = false
     end
 end
+function StopTween(target)
+    if not target then
+        _G.StopTween = true
+        wait()
+        ATween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+        wait()
+        if game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
+        end
+        _G.StopTween = false
+        _G.Clip = false
+    end
+    if game.Players.LocalPlayer.Character:FindFirstChild('Highlight') then
+        game.Players.LocalPlayer.Character:FindFirstChild('Highlight'):Destroy()
+    end
+end
 local MainTab = Window:CreateTab("Main", 4483362458) -- Icon ID from Roblox library
 local SettingsTab = Window:CreateTab("Settings", 4483362458)
 -- Adding Sections and Elements to Main Tab

@@ -15,7 +15,7 @@ local SettingsTab = Window:CreateTab("Settings", 4483362458)
 -- Adding Sections and Elements to Main Tab
 local MainSection = MainTab:CreateSection("Main Functions")
 local function AutoHaki(Value)
-    if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") and CurrectValue then
+    if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") and Value then
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
     end
 end
@@ -29,7 +29,7 @@ MainTab:CreateButton({
 MainTab:CreateToggle({
     Name = "Enable Feature",
     CurrentValue = false,
-    Callback = 
+    Callback = AutoHaki(CurrentValue)
 })
 
 MainTab:CreateSlider({

@@ -14,7 +14,7 @@ local MainTab = Window:CreateTab("Main", 4483362458) -- Icon ID from Roblox libr
 local SettingsTab = Window:CreateTab("Settings", 4483362458)
 -- Adding Sections and Elements to Main Tab
 local MainSection = MainTab:CreateSection("Main Functions")
-function(Value)
+local function AutoHaki(Value)
     if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") and CurrectValue then
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
     end
@@ -29,11 +29,7 @@ MainTab:CreateButton({
 MainTab:CreateToggle({
     Name = "Enable Feature",
     CurrentValue = false,
-    Callback = function(Value)
-        if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") and CurrectValue then
-            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
-        end
-    end
+    Callback = 
 })
 
 MainTab:CreateSlider({

@@ -22,20 +22,11 @@ end
 MainTab:CreateButton({
     Name = "XinChao",
     Callback = function()
-        print("XinChao")
+        if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") and Value then
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+        end
     end,
 })
-
-MainTab:CreateToggle({
-    Name = "Enable Feature",
-    CurrentValue = false,
-    Callback = function()
-            if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
-                game:GetService("VirtualInputManager"):SendKeyEvent(false,"V",false,game)
-            end
-        end
-})
-
 MainTab:CreateSlider({
     Name = "Adjust Value",
     Range = {0, 100},

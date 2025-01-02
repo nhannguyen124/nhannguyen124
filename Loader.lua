@@ -11,6 +11,7 @@ local Window = Rayfield:CreateWindow({
     },
     KeySystem = false, -- Set to true if you want a key system
 })
+local Speed = 210
 function Click()
     game:GetService'VirtualUser':CaptureController()
     game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))

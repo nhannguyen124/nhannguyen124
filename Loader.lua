@@ -185,8 +185,9 @@ SettingsTab:CreateInput({
     Name = "Enter Text",
     PlaceholderText = "Type here...",
     Callback = function(Pos)
+            print(Pos[1],Pos[2],Pos[3]
             Pos = Vector3.new(Pos[1],Pos[2],Pos[3])
-            print('2')
+            
             Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
             print('3')
             if game.Players.LocalPlayer.Character.Humanoid.Sit == true then game.Players.LocalPlayer.Character.Humanoid.Sit = false end

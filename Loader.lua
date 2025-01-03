@@ -209,3 +209,41 @@ MainTab:CreateToggle({
             end
         end,
     })
+MainTab:CreateToggle({
+        Name = "Auto Random Fruit",
+        CurrentValue = false,
+        Callback = function(Value)
+                while wait() do
+                    if _G.RaidPirate then
+                        pcall(function()
+                            local CFrameBoss = CFrame.new(-5496.17432, 313.768921, -2841.53027, 0.924894512, 7.37058015e-09, 0.380223751, 3.5881019e-08, 1, -1.06665446e-07, -0.380223751, 1.12297109e-07, 0.924894512)
+                            if (CFrame.new(-5539.3115234375, 313.800537109375, -2972.372314453125).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 500 then
+                                for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                    if _G.RaidPirate and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                        if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
+                                            repeat wait()
+                                                AutoHaki()
+                                                EquipWeapon(_G.SelectWeapon)
+                                                v.HumanoidRootPart.CanCollide = false
+                                                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                                ATween(v.HumanoidRootPart.CFrame * Pos)
+                                                Click()
+                                            until v.Humanoid.Health <= 0 or not v.Parent or not _G.RaidPirate
+                                        end
+                                    end
+                                end
+                            else
+                                UnEquipWeapon(_G.SelectWeapon)
+                                if BypassTP then
+                                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameBoss.Position).Magnitude > 1500 then
+            			        BTP(CFrameBoss)
+            				    elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameBoss.Position).Magnitude < 1500 then
+            				    ATween(CFrameBoss)
+            					end
+                                end
+                            end
+                        end)
+                    end
+                end
+            end,
+    })

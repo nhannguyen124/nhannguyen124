@@ -187,7 +187,9 @@ SettingsTab:CreateInput({
     Callback = function(Pos)
             print(Pos)
             Pos = CFrame.new(Pos)
+            print('2')
             Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+            print('3')
             if game.Players.LocalPlayer.Character.Humanoid.Sit == true then game.Players.LocalPlayer.Character.Humanoid.Sit = false end
                 pcall(function() tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/350, Enum.EasingStyle.Linear),{CFrame = Pos}) end)
                 tween:Play()

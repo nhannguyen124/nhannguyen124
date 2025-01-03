@@ -46,3 +46,14 @@ function TPReturner()
         end
     end
 end
+function Teleport() 
+    while wait() do
+        pcall(function()
+            TPReturner()
+            if foundAnything ~= "" then
+                TPReturner()
+            end
+        end)
+    end
+end
+Teleport()

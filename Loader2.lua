@@ -3025,7 +3025,7 @@ end
 
 
 
-ToggleFarm = M:AddToggle({
+ToggleFarm = M:CreateToggle({
     Name = "Auto Farm",
     Default = false,
     Flag = "LevelFarm",
@@ -3036,7 +3036,7 @@ ToggleFarm = M:AddToggle({
     end    
 })
 
-M:AddToggle({
+M:CreateToggle({
     Name = "Bypass TP(Can Erorrs)",
     Default = false,
     Flag = "Bypass TP",
@@ -3052,7 +3052,7 @@ local Section = M:AddSection({
 
 
 
-M:AddToggle({
+M:CreateToggle({
     Name = "Auto Farm BF Mastery",
     Default = false,
     Flag = "Mastery",
@@ -3066,7 +3066,7 @@ M:AddToggle({
     end    
 })
 
-M:AddToggle({
+M:CreateToggle({
     Name = "Auto Farm Gun Mastery",
     Default = false,
     Flag = "Gun Mastery",
@@ -3092,7 +3092,7 @@ M:AddToggle({
         end    
     })
 
-    M:AddToggle({
+    M:CreateToggle({
         Name = "Skill Z",
         Default = false,
         Flag = "Skill Z",
@@ -3102,7 +3102,7 @@ M:AddToggle({
         end    
     })
 
-    M:AddToggle({
+    M:CreateToggle({
         Name = "Skill! X",
         Default = false,
         Default = false,
@@ -3114,7 +3114,7 @@ M:AddToggle({
     })
 
 
-    M:AddToggle({
+    M:CreateToggle({
         Name = "Skill C",
         Default = false,
         Default = false,
@@ -3126,7 +3126,7 @@ M:AddToggle({
     })
 
 
-    M:AddToggle({
+    M:CreateToggle({
         Name = "Skill V",
         Default = false,
         Default = false,
@@ -3137,7 +3137,7 @@ M:AddToggle({
         end    
     })
 
-    M:AddToggle({
+    M:CreateToggle({
         Name = "Skill F",
         Default = false,
         Default = false,
@@ -3152,7 +3152,7 @@ M:AddToggle({
         Name = "Bring Mob"
     })
 
-M:AddToggle({
+M:CreateToggle({
     Name = "Bring Mobs[Fix]",
     Default = true,
     Flag = "Bring Mobs",
@@ -3194,7 +3194,7 @@ local Section = M:AddSection({
     Name = "FastAttack :"
 })
 
-M:AddToggle({
+M:CreateToggle({
     Name = "FastAttack",
     Default = true,
     Flag = "FastAttack",
@@ -3322,7 +3322,7 @@ local Section = M:AddSection({
     Name = "Farm Fast : Lv 10 => 120 (erorrs)"
 })
 
-Farmfasttoggle = M:AddToggle({
+Farmfasttoggle = M:CreateToggle({
     Name = "Auto Farm Fast",
     Default = false,
     Flag = "Farm Fast",
@@ -3339,7 +3339,7 @@ local Section = M:AddSection({
 
 
 
-M:AddToggle({
+M:CreateToggle({
     Name = "Kaitun[Not kill players]",
     Default = false,
     Flag = "Kaitun",
@@ -3363,7 +3363,7 @@ M:AddToggle({
     end    
 })
 
-M:AddToggle({
+M:CreateToggle({
     Name = "Auto Click[Kick]",
     Default = false,
     Flag = "Auto Click",
@@ -3436,7 +3436,7 @@ if World1 then
     }) 
     end
     
-    M:AddToggle({
+    M:CreateToggle({
         Name = "Farm Mob",
         Default = false,
         Callback = function(Value)
@@ -3448,7 +3448,7 @@ local Section = M:AddSection({
     Name = "Nearest Farm"
 })
 
-M:AddToggle({
+M:CreateToggle({
     Name = "Auto Farm Nearest",
     Default = false,
     Flag = "Auto Farm Nearest",
@@ -3463,7 +3463,7 @@ M:AddToggle({
         Name = "Chest Farm"
     })
 
-TweenChest = M:AddToggle({
+TweenChest = M:CreateToggle({
         Name = "Auto Chest [MUP]",
         Default = false,
         Flag = "Auto Chest",
@@ -3474,7 +3474,7 @@ TweenChest = M:AddToggle({
         end    
     })
 
-    M:AddToggle({
+    M:CreateToggle({
         Name = "Auto Chest[Bypass]",
         Default = false,
         Flag = "Auto Chest[Bypass]",
@@ -3484,7 +3484,7 @@ TweenChest = M:AddToggle({
         end    
     })
 
-M:AddToggle({
+M:CreateToggle({
     Name = "Stop Only Dark Key or God's Chalice",
     Default = false,
     Flag = "Stop Only Dark Key or God's Chalice",
@@ -3519,7 +3519,7 @@ spawn(function()
     end
 end)
 
-ToggleBone = M:AddToggle({
+ToggleBone = M:CreateToggle({
     Name = "Auto Farm Bone",
     Default = false,
     Flag = "Auto Farm Bone",
@@ -3530,7 +3530,7 @@ ToggleBone = M:AddToggle({
     end    
 })
         
-ToggleRandom = M:AddToggle({
+ToggleRandom = M:CreateToggle({
         Name = "Auto Random Bone",
         Default = false,
         Flag = "Auto Random Bone",
@@ -3563,7 +3563,7 @@ local EliteProgress = M:AddLabel("")
         end)
     end)
 
-    M:AddToggle({
+    M:CreateToggle({
         Name = "Auto Elite",
         Default = false,
         Flag = "Auto Elite",
@@ -3575,7 +3575,7 @@ local EliteProgress = M:AddLabel("")
     })
 
 
-    M:AddToggle({
+    M:CreateToggle({
         Name = "Auto Factory",
         Default = false,
         Flag = "Auto Factory",
@@ -3586,7 +3586,7 @@ local EliteProgress = M:AddLabel("")
         end    
     })
 
-        M:AddToggle({
+        M:CreateToggle({
             Name = "Raid Castle",
             Default = false,
             Flag = "Auto Castle",
@@ -3601,7 +3601,7 @@ local EliteProgress = M:AddLabel("")
         })
         
 
-        M:AddToggle({
+        M:CreateToggle({
             Name = "Auto Katakuri",
             Default = false,
             Flag = "Auto Katakuri",
@@ -3612,7 +3612,7 @@ local EliteProgress = M:AddLabel("")
             end    
         })    
         
-        M:AddToggle({
+        M:CreateToggle({
             Name = "Auto Spawn Katakuri",
             Default = true,
             Callback = function(Value)
@@ -3620,7 +3620,7 @@ local EliteProgress = M:AddLabel("")
             end    
         })
         
-        M:AddToggle({
+        M:CreateToggle({
             Name = "Auto Katakuri v2",
             Default = false,
             Flag = "Auto Katakuri v2",
@@ -3631,7 +3631,7 @@ local EliteProgress = M:AddLabel("")
             end    
         })
         
-        M:AddToggle({
+        M:CreateToggle({
             Name = "Auto Katakuri v2[HOP]",
             Default = false,
             Flag = "Auto Katakuri v2[HOP]",
@@ -3651,7 +3651,7 @@ local Section = M:AddSection({
         Name = "Observation Haki"
     })
 
-    M:AddToggle({
+    M:CreateToggle({
         Name = "Auto Farm Observation Haki",
         Default = false,
         Flag = "Auto Farm Observation Haki",
@@ -3662,7 +3662,7 @@ local Section = M:AddSection({
         end    
     })
     
-    M:AddToggle({
+    M:CreateToggle({
         Name = "Auto Farm Observation Haki[HOP]",
         Default = false,
         Flag = "Auto Farm Observation Haki[HOP]",
@@ -3676,7 +3676,7 @@ local Section = M:AddSection({
         Name = "Melee v2"
     })
     
-    M:AddToggle({
+    M:CreateToggle({
         Name = "Auto Death Step",
         Default = false,
         Flag = "Auto Death Step",
@@ -3686,7 +3686,7 @@ local Section = M:AddSection({
         end    
     })
 
-    M:AddToggle({
+    M:CreateToggle({
         Name = "Auto SharkMan Karate",
         Default = false,
         Flag = "Auto SharkMan",
@@ -3697,7 +3697,7 @@ local Section = M:AddSection({
         end    
     })
 
- M:AddToggle({
+ M:CreateToggle({
         Name = "Auto Electric Claw",
         Default = false,
         Flag = "Auto Electric Claw",
@@ -3708,7 +3708,7 @@ local Section = M:AddSection({
         end    
     })
 
-    M:AddToggle({
+    M:CreateToggle({
         Name = "Auto Dragon Talon",
         Default = false,
         Flag = "Auto Dragon Talon",
@@ -3718,7 +3718,7 @@ local Section = M:AddSection({
         end    
     })
 
-    M:AddToggle({
+    M:CreateToggle({
         Name = "Auto GodHuman",
         Default = false,
         Flag = "Auto GodHuman",
@@ -3728,7 +3728,7 @@ local Section = M:AddSection({
         end    
     })
 
-    ST:AddToggle({
+    ST:CreateToggle({
         Name = "Auto Haki",
         Default = true,
         Callback = function(Value)
@@ -3748,7 +3748,7 @@ local Section = M:AddSection({
         end
     end)
 
-    ST:AddToggle({
+    ST:CreateToggle({
         Name = "Anti Afk",
         Default = true,
         Callback = function(Value)
@@ -3763,7 +3763,7 @@ local Section = M:AddSection({
         end    
     })
 
-    ST:AddToggle({
+    ST:CreateToggle({
         Name = "White screen",
         Default = false,
         Flag = "White screen",
@@ -3797,7 +3797,7 @@ elseif _G.WhiteScreen == false then
     
     CheckAntiCheatBypass()
     
-    ST:AddToggle({
+    ST:CreateToggle({
         Name = "Antiban",
         Default = true,
         Callback = function(Value)
@@ -3823,7 +3823,7 @@ spawn(function()
     end
 end)
 
-IQ:AddToggle({
+IQ:CreateToggle({
     Name = "Auto Saber",
     Default = false,
     Flag = "Auto Saber",
@@ -3835,7 +3835,7 @@ IQ:AddToggle({
 })
 
 
-IQ:AddToggle({
+IQ:CreateToggle({
     Name = "Auto Saber[HOP]",
     Default = false,
     Flag = "Auto Saber[HOP]",
@@ -3862,7 +3862,7 @@ spawn(function()
     end
 end)
 
-TogglePolev1 = IQ:AddToggle({
+TogglePolev1 = IQ:CreateToggle({
     Name = "Auto Pole V.1",
     Default = false,
     Flag = "Auto Pole",
@@ -3873,7 +3873,7 @@ TogglePolev1 = IQ:AddToggle({
     end    
 })
 
-TogglePolev1Hop = IQ:AddToggle({
+TogglePolev1Hop = IQ:CreateToggle({
     Name = "Auto Pole V.1[HOP]",
     Default = false,
     Flag = "Auto Pole[HOP]",
@@ -3887,7 +3887,7 @@ local Section = IQ:AddSection({
     Name = "Second Sea"
 })
 
-IQ:AddToggle({
+IQ:CreateToggle({
     Name = "Auto Second Sea",
     Default = false,
     Flag = "Auto Second",
@@ -3901,7 +3901,7 @@ IQ:AddToggle({
 local Section = IQ:AddSection({
     Name = "Vampire"
 })
-IQ:AddToggle({
+IQ:CreateToggle({
     Name = "Auto Vampire",
     Default = false,
     Flag = "Auto Vampire",
@@ -3917,7 +3917,7 @@ local Section = IQ:AddSection({
     Name = "SuperHuman"
 })
 
-IQ:AddToggle({
+IQ:CreateToggle({
     Name = "Auto SuperHuman",
     Default = false,
     Flag = "Auto SuperHuman",
@@ -3933,7 +3933,7 @@ local Section = IQ:AddSection({
 })
 
 
-BartiloToggle = IQ:AddToggle({
+BartiloToggle = IQ:CreateToggle({
     Name = "Auto Bartilo Quest",
     Default = false,
     Flag = "Auto Bartilo",
@@ -3950,7 +3950,7 @@ local Section = IQ:AddSection({
 })
 
 
-IQ:AddToggle({
+IQ:CreateToggle({
     Name = "Auto Third Sea",
     Default = false,
     Flag = "Auto Third",
@@ -3961,7 +3961,7 @@ IQ:AddToggle({
     end    
 })
 
-IQ:AddToggle({
+IQ:CreateToggle({
     Name = "Auto Buy Legend Sword",
     Default = false,
     Flag = "Auto Legend",
@@ -3975,7 +3975,7 @@ local Section = IQ:AddSection({
     Name = "Buddy Sword"
 })
 
-IQ:AddToggle({
+IQ:CreateToggle({
     Name = "Auto Buddy Sword",
     Default = false,
     Flag = "Auto Buddy",
@@ -3986,7 +3986,7 @@ IQ:AddToggle({
     end    
 })
 
-IQ:AddToggle({
+IQ:CreateToggle({
     Name = "Auto Buddy Sword[HOP]",
     Default = false,
     Flag = "Auto Buddy[HOP]",
@@ -4000,7 +4000,7 @@ IQ:AddToggle({
         Name = "Soul Guita"
     })
 
-    IQ:AddToggle({
+    IQ:CreateToggle({
         Name = "Auto Soul Guita",
         Default = false,
         Flag = "Auto Soul",
@@ -4011,7 +4011,7 @@ IQ:AddToggle({
         end    
     })
 
-IQ:AddToggle({
+IQ:CreateToggle({
     Name = "Auto Soul Guita[HOP]",
     Default = false,
     Flag = "Auto Soul[HOP]",
@@ -4021,7 +4021,7 @@ IQ:AddToggle({
     end    
 })
 
-IQ:AddToggle({
+IQ:CreateToggle({
     Name = "Auto Auto Observation V2",
     Default = false,
     Flag = "Auto ObservationV2",
@@ -4036,7 +4036,7 @@ local Section = IQ:AddSection({
     Name = "Auto Dual Curset Katana[Not Work]"
 })
 
-IQ:AddToggle({
+IQ:CreateToggle({
     Name = "Auto Dual Curset Katana",
     Default = false,
     Flag = "Auto DualCursetKatana",
@@ -4051,7 +4051,7 @@ local Section = IQ:AddSection({
     Name = "Tushita"
 })
 
-IQ:AddToggle({
+IQ:CreateToggle({
     Name = "Auto Tushita",
     Default = false,
     Flag = "Auto Tushita",
@@ -4063,7 +4063,7 @@ IQ:AddToggle({
     end    
 })
 
-IQ:AddToggle({
+IQ:CreateToggle({
     Name = "Auto Tushita[HOP]",
     Default = false,
     Flag = "Auto Tushita[HOP]",
@@ -4077,7 +4077,7 @@ local Section = IQ:AddSection({
     Name = "Cavander"
 })
 
-IQ:AddToggle({
+IQ:CreateToggle({
     Name = "Auto Cavander",
     Default = false,
     Flag = "Auto Cavander",
@@ -4088,7 +4088,7 @@ IQ:AddToggle({
     end    
 })
 
-IQ:AddToggle({
+IQ:CreateToggle({
     Name = "Auto Cavander[HOP]",
     Default = false,
     Flag = "Auto Cavander[HOP]",
@@ -4102,7 +4102,7 @@ IQ:AddToggle({
             Name = "Twin Hook"
         })
 
-        IQ:AddToggle({
+        IQ:CreateToggle({
             Name = "Auto Twin Hook",
             Default = false,
             Flag = "Auto Twin",
@@ -4113,7 +4113,7 @@ IQ:AddToggle({
             end    
         })
         
-        IQ:AddToggle({
+        IQ:CreateToggle({
             Name = "Auto Twin Hook[HOP]",
             Default = false,
             Flag = "Auto Twin[HOP]",
@@ -4129,7 +4129,7 @@ IQ:AddToggle({
 
         IQ:AddLabel("For those who don't understand, this is automatic dummy hitting.")
 
-        IQ:AddToggle({
+        IQ:CreateToggle({
             Name = "Automatically hit the dummy",
             Default = false,
             Flag = "Auto dummy",
@@ -4140,7 +4140,7 @@ IQ:AddToggle({
             end    
         })
 
-        IQ:AddToggle({
+        IQ:CreateToggle({
             Name = "Automatically hit the dummy[HOP]",
             Default = false,
             Flag = "Auto dummy[HOP]",
@@ -4154,7 +4154,7 @@ IQ:AddToggle({
             Name = "Seperator Hallow Scythe"
         })
 
-        IQ:AddToggle({
+        IQ:CreateToggle({
             Name = "Auto Hallow Scythe",
             Default = false,
             Flag = "Auto Hallow",
@@ -4165,7 +4165,7 @@ IQ:AddToggle({
             end    
         })
 
-ToggleHallow = IQ:AddToggle({
+ToggleHallow = IQ:CreateToggle({
             Name = "Auto Hallow Scythe[HOP]",
             Default = false,
             Flag = "Auto Hallow[HOP]",
@@ -4179,7 +4179,7 @@ ToggleHallow = IQ:AddToggle({
             Name = "Dark Dragger"
         })
 
-        IQ:AddToggle({
+        IQ:CreateToggle({
             Name = "Auto Dark Dragger",
             Default = false,
             Flag = "Auto Dark",
@@ -4190,7 +4190,7 @@ ToggleHallow = IQ:AddToggle({
             end    
         })
 
-        IQ:AddToggle({
+        IQ:CreateToggle({
             Name = "Auto Dark Dragger[HOP]",
             Default = false,
             Flag = "Auto Dark[HOP]",
@@ -4227,7 +4227,7 @@ ToggleHallow = IQ:AddToggle({
         Name = "SeaBeast"
     })
 
-    IQ:AddToggle({
+    IQ:CreateToggle({
         Name = "Auto Seabeast",
         Default = false,
         Flag = "Auto Seabeast",
@@ -4238,7 +4238,7 @@ ToggleHallow = IQ:AddToggle({
         end    
     })
 
-IQ:AddToggle({
+IQ:CreateToggle({
     Name = "Auto Seabeast[HOP]",
     Default = false,
     Flag = "Auto Seabeast[HOP]",
@@ -4264,7 +4264,7 @@ local Section = IQ:AddSection({
         Name = "Mirrage Menu"
     })
 
-IQ:AddToggle({
+IQ:CreateToggle({
     Name = "Auto Summon and Find Mirrage Island",
     Default = false,
     Flag = "Auto Mirrage",
@@ -4338,7 +4338,7 @@ IQ:AddToggle({
     end    
 }) 
     
-IQ:AddToggle({
+IQ:CreateToggle({
     Name = "Find Mirrage[HOP]",
     Default = false,
     Flag = "Auto Mirrage2",
@@ -4438,7 +4438,7 @@ local Fruit = S:AddLabel("Fruit : ")
         end
     end)
 
-S:AddToggle({
+S:CreateToggle({
     Name = "Auto Stats Kaitun",
     Default = false,
     Flag = "Auto Kaitun",
@@ -4448,7 +4448,7 @@ S:AddToggle({
     end    
 })
 
-S:AddToggle({
+S:CreateToggle({
     Name = "Melee",
     Default = false,
     Flag = "Auto Melee",
@@ -4458,7 +4458,7 @@ S:AddToggle({
     end    
 })
 
-S:AddToggle({
+S:CreateToggle({
     Name = "Defense",
     Default = false,
     Flag = "Auto Defense",
@@ -4468,7 +4468,7 @@ S:AddToggle({
     end    
 })
 
-S:AddToggle({
+S:CreateToggle({
     Name = "Sword",
     Default = false,
     Flag = "Auto Sword",
@@ -4478,7 +4478,7 @@ S:AddToggle({
     end    
 })
 
-S:AddToggle({
+S:CreateToggle({
     Name = "Gun",
     Default = false,
     Flag = "Auto Gun",
@@ -4488,7 +4488,7 @@ S:AddToggle({
     end    
 })
 
-S:AddToggle({
+S:CreateToggle({
     Name = "Devil Fruit",
     Default = false,
     Flag = "Auto Fruit",
@@ -4518,7 +4518,7 @@ local Section = E:AddSection({
     Name = "ESP MENU"
 })
 
-E:AddToggle({
+E:CreateToggle({
     Name = "ESP Players",
     Default = false,
     Flag = "ESP Players",
@@ -4574,7 +4574,7 @@ function UpdatePlayerChams()
     end
 end
 
-E:AddToggle({
+E:CreateToggle({
     Name = "ESP Fruits",
     Default = false,
     Flag = "ESP Fruits",
@@ -4641,7 +4641,7 @@ spawn(function()
     end
 end)
 
-E:AddToggle({
+E:CreateToggle({
     Name = "ESP Island",
     Default = false,
     Flag = "ESP Island",
@@ -4687,7 +4687,7 @@ function UpdateIslandESP()
     end
 end
 
-E:AddToggle({
+E:CreateToggle({
     Name = "ESP Flower",
     Default = false,
     Flag = "ESP Flower",
@@ -4781,7 +4781,7 @@ RA:AddButton({
       end    
 })
 
-RA:AddToggle({
+RA:CreateToggle({
     Name = "Auto Start Raid",
     Default = false,
     Flag = "Auto Start",
@@ -4796,7 +4796,7 @@ local Section = RA:AddSection({
     Name = "Raid Menu"
 })
 
-RA:AddToggle({
+RA:CreateToggle({
     Name = "KillAura",
     Default = false,
     Flag = "Auto KillAura",
@@ -4806,7 +4806,7 @@ RA:AddToggle({
     end    
 })
 
-    RA:AddToggle({
+    RA:CreateToggle({
         Name = "Next Island",
         Default = false,
         Flag = "Auto NextIsland",
@@ -4817,7 +4817,7 @@ RA:AddToggle({
         end    
     })
 
-RA:AddToggle({
+RA:CreateToggle({
     Name = "Auto Awakener",
     Default = false,
     Flag = "Auto Awakener",
@@ -4831,7 +4831,7 @@ local Section = RA:AddSection({
     Name = "Raid Law Menu"
 })
 
-RA:AddToggle({
+RA:CreateToggle({
     Name = "Auto Buy Chips Law[Raid]",
     Default = false,
     Flag = "Auto Chips Law",
@@ -4841,7 +4841,7 @@ RA:AddToggle({
     end    
 })
 
-RA:AddToggle({
+RA:CreateToggle({
     Name = "Start Raid Law",
     Default = false,
     Flag = "Auto Start Raid Law",
@@ -4851,7 +4851,7 @@ RA:AddToggle({
     end    
 })
 
-RA:AddToggle({
+RA:CreateToggle({
     Name = "Auto Kill Law",
     Default = false,
     Flag = "Auto Kill Law",
@@ -4951,7 +4951,7 @@ LC:AddDropdown({
 })
 end
 
-LC:AddToggle({
+LC:CreateToggle({
     Name = "Teleport To Island",
     Default = false,
     Callback = function(Value)
@@ -5153,7 +5153,7 @@ end
         })
     end
 
-        LC:AddToggle({
+        LC:CreateToggle({
             Name = "Teleport To NPC",
             Default = false,
             Callback = function(Value)
@@ -5270,7 +5270,7 @@ LC:AddButton({
             Name = "Teleport SeSeabeast"
         })
 
-LC:AddToggle({
+LC:CreateToggle({
     Name = "Teleport to Seabeast",
     Default = false,
     Flag = "Teleport to Seabeast",
@@ -5296,7 +5296,7 @@ LC:AddButton({
       end    
 })
 
-LC:AddToggle({
+LC:CreateToggle({
     Name = "Teleport To Mirage Island",
     Default = false,
     Flag = "Teleport to Mirage",
@@ -5353,7 +5353,7 @@ LC:AddButton({
       end     
 })
 
-LC:AddToggle({
+LC:CreateToggle({
     Name = "Teleport To Players",
     Default = false,
     Callback = function(Value)
@@ -5368,7 +5368,7 @@ LC:AddToggle({
 })
 
 
-LC:AddToggle({
+LC:CreateToggle({
     Name = "Auto Kill Players",
     Default = false,
     Callback = function(Value)
@@ -5381,7 +5381,7 @@ local Section = LC:AddSection({
     Name = "AimBot"
 })
 
-LC:AddToggle({
+LC:CreateToggle({
     Name = "AimBot",
     Default = false,
     Callback = function(Value)
@@ -5393,7 +5393,7 @@ LC:AddToggle({
 
 
 
-LC:AddToggle({
+LC:CreateToggle({
     Name = "Aimbot Skill Nearest",
     Default = false,
     Flag = "Aimbot Skill Nearest",
@@ -5499,7 +5499,7 @@ local Section = SV:AddSection({
     Name = "Hop Find"
 })
 
-SV:AddToggle({
+SV:CreateToggle({
 	Name = "Hop Find Moon 3/4 or 4/4",
 	Default = false,
     Flag = "FindFM",
@@ -5509,7 +5509,7 @@ SV:AddToggle({
 	end    
 })
 
-SV:AddToggle({
+SV:CreateToggle({
 	Name = "Hop Find Mirrage",
 	Default = false,
     Flag = "FindMrg",
@@ -5621,7 +5621,7 @@ D:AddButton({
       end    
 })
 
-D:AddToggle({
+D:CreateToggle({
     Name = "Auto Random Fruits",
     Default = false,
     Flag = "Auto Random Fruits",
@@ -5679,7 +5679,7 @@ FruitList = {
     "Leopard-Leopard"
 }
 
-D:AddToggle({
+D:CreateToggle({
     Name = "Auto Store Fruits",
     Default = false,
     Flag = "Auto Store Fruits",
@@ -5718,7 +5718,7 @@ function DropFruit()
         end
     end)
 end
-D:AddToggle({
+D:CreateToggle({
     Name = "Teleport To Fruit Spawn",
     Default = false,
     Flag = "Teleport To Fruit Spawn",
@@ -5740,7 +5740,7 @@ spawn(function()
 	end
 end)
 
-D:AddToggle({
+D:CreateToggle({
     Name = "Auto Drop Fruit",
     Default = false,
     Flag = "Auto Drop Fruit",
@@ -5780,7 +5780,7 @@ spawn(function()
     end
 end)
 
-D:AddToggle({
+D:CreateToggle({
     Name = "Bring All Fruit[75% Kick]",
     Default = false,
     Flag = "Bring All Fruit[75% Kick]",
@@ -5807,7 +5807,7 @@ local Section = R:AddSection({
 	Name = "Race v2"
 })
 
-R:AddToggle({
+R:CreateToggle({
 	Name = "Auto Race(V1 - V2 - V3)",
 	Default = false,
     Flag = "Auto Race",
@@ -5821,7 +5821,7 @@ local Section = R:AddSection({
 	Name = "Pull Lever"
 })
 
-AutoPullLever = R:AddToggle({
+AutoPullLever = R:CreateToggle({
     Name = "Auto Pull Lever",
     Default = false,
     Flag = "Auto Pull Lever",
@@ -5832,7 +5832,7 @@ AutoPullLever = R:AddToggle({
     end    
 })
 
-R:AddToggle({
+R:CreateToggle({
     Name = "Auto Turn On Race v3",
     Default = false,
     Flag = "Auto Turn On Race v3",
@@ -5852,7 +5852,7 @@ spawn(function()
         end)
     end
 end)
-R:AddToggle({
+R:CreateToggle({
     Name = "Auto Turn On Race v4",
     Default = false,
     Flag = "Auto Turn On Race v4",
@@ -5873,7 +5873,7 @@ spawn(function()
     end
 end)
 
-MoveCamTooMoonToggle = R:AddToggle({
+MoveCamTooMoonToggle = R:CreateToggle({
     Name = "Move Cam to Moon",
     Default = false,
     Flag = "Move Cam to Moon",
@@ -5906,7 +5906,7 @@ local Section = R:AddSection({
 	Name = "Race v4"
 })
 
-R:AddToggle({
+R:CreateToggle({
     Name = "Auto Buy Gear",
     Default = false,
     Flag = "Auto Buy Gear",
@@ -5935,7 +5935,7 @@ end
 end)  
 end)
 
-R:AddToggle({
+R:CreateToggle({
     Name = "Auto Train Race",
     Default = false,
     Flag = "Auto Train Race",
@@ -6037,7 +6037,7 @@ local Section = R:AddSection({
     Name = "Other Trials"
 })
 
-R:AddToggle({
+R:CreateToggle({
     Name = "Auto Complete Trials",
     Default = false,
     Flag = "Auto Complete Trials",
@@ -6048,7 +6048,7 @@ R:AddToggle({
     end    
 })
 
-R:AddToggle({
+R:CreateToggle({
     Name = "Auto Kill Players After Trials",
     Default = false,
     Flag = "KillTrials",
@@ -6418,7 +6418,7 @@ C:AddButton({
       end    
 })
 
-C:AddToggle({
+C:CreateToggle({
     Name = "Buy Haki Color(Random)",
     Default = false,
     Callback = function(Value)
@@ -6445,7 +6445,7 @@ local Section = C:AddSection({
     Name = "Level Lock"
 })
 
-C:AddToggle({
+C:CreateToggle({
 	Name = "Lock Level",
 	Default = false,
     Flag = "Lock Level",
@@ -6500,7 +6500,7 @@ spawn(function()
         Name = "Rejoin"
     })
 
-C:AddToggle({
+C:CreateToggle({
     Name = "Auto Rejoin",
     Default = false,
     Callback = function(Value)
@@ -6523,7 +6523,7 @@ spawn(function()
         Name = "Players"
     })
 
-    C:AddToggle({
+    C:CreateToggle({
         Name = "Walk On Water",
         Default = true,
         Callback = function(Value)
@@ -6546,7 +6546,7 @@ spawn(function()
         Name = "Misc Players"
     })
 
-    C:AddToggle({
+    C:CreateToggle({
         Name = "Infinity Soru",
         Default = false,
         Callback = function(Value)
@@ -6575,7 +6575,7 @@ spawn(function()
         end
     end)
 
-    C:AddToggle({
+    C:CreateToggle({
         Name = "No Clip",
         Default = false,
         Callback = function(Value)
@@ -6611,7 +6611,7 @@ C:AddButton({
       end    
 })
 
-C:AddToggle({
+C:CreateToggle({
     Name = "Infinity Geppo",
     Default = false,
     Callback = function(Value)

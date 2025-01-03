@@ -185,16 +185,17 @@ SettingsTab:CreateInput({
     Name = "Enter Text",
     PlaceholderText = "Type here...",
     Callback = function(Pos)
-        Pos = CFrame.new(Pos)
-        Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-        if game.Players.LocalPlayer.Character.Humanoid.Sit == true then game.Players.LocalPlayer.Character.Humanoid.Sit = false end
-            pcall(function() tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/350, Enum.EasingStyle.Linear),{CFrame = Pos}) end)
-            tween:Play()
-        if Distance <= 350 then
-            tween:Cancel()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
-        end
-    end,
+            print(Pos)
+            Pos = CFrame.new(Pos)
+            Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+            if game.Players.LocalPlayer.Character.Humanoid.Sit == true then game.Players.LocalPlayer.Character.Humanoid.Sit = false end
+                pcall(function() tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/350, Enum.EasingStyle.Linear),{CFrame = Pos}) end)
+                tween:Play()
+            if Distance <= 350 then
+                tween:Cancel()
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
+            end
+        end,
 })
 MainTab:CreateToggle({
         Name = "Auto Random Fruit",
@@ -210,7 +211,7 @@ MainTab:CreateToggle({
         end,
     })
 MainTab:CreateToggle({
-        Name = "Auto Random Fruit",
+        Name = "Auto Pirate Raid",
         CurrentValue = false,
         Callback = function(Value)
                 while wait() do

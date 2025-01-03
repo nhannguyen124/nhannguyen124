@@ -185,8 +185,7 @@ SettingsTab:CreateInput({
     Name = "Enter Text",
     PlaceholderText = "Type here...",
     Callback = function(Pos)
-            print(Pos)
-            Pos = CFrame.new(Pos)
+            Pos = Vector3.new(Pos[1],Pos[2],Pos[3])
             print('2')
             Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
             print('3')

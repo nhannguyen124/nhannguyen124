@@ -2651,8 +2651,8 @@ end)
 wait(5)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/BinbinvoGamingVNClone/BinbinvoGamingVNClone.github.io/refs/heads/main/Welcome.lua",true))()
 wait(5)
-local OrionLib = loadstring(game:HttpGet("https://binbinvogamingvnclone.github.io/Orion/BinbinvoGamingLib",true))()
-OrionLib:MakeNotification({
+local OrionLib = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+OrionLib:Notify({
     Name = "BinbinvoGaming Hub",
     Content = "Please Wait loading script...,Do not enable any function",
     Image = "rbxassetid://8192162908",
@@ -2662,7 +2662,7 @@ local Window = OrionLib:MakeWindow({Name = "BinbinvoGaming Hub - Blox Fruits", H
 
 
 
-OrionLib:MakeNotification({
+OrionLib:Notify({
     Name = "BinbinvoGaming Hub",
     Content = "Please Wait loading script...,Do not enable any function",
     Image = "rbxassetid://8192162908",
@@ -2671,105 +2671,105 @@ OrionLib:MakeNotification({
 wait(3)
 -------------Tab-----------------------
 
-local W = Window:MakeTab({
+local W = Window:CreateTab({
     Name = "Information Hub",
     Icon = "rbxassetid://8192162908",
     PremiumOnly = false
 })
 
-local M = Window:MakeTab({
+local M = Window:CreateTab({
     Name = "Main",
     Icon = "rbxassetid://8192162908",
     PremiumOnly = false
 })
 
-local ST = Window:MakeTab({
+local ST = Window:CreateTab({
     Name = " Settings",
     Icon = "rbxassetid://8192162908",
     PremiumOnly = false
 })
 
-local IQ = Window:MakeTab({
+local IQ = Window:CreateTab({
     Name = " Item & Quest",
     Icon = "rbxassetid://8192162908",
     PremiumOnly = false
 })
 
-local S = Window:MakeTab({
+local S = Window:CreateTab({
     Name = " Numeral",
     Icon = "rbxassetid://8192162908",
     PremiumOnly = false
 })
 
-local E = Window:MakeTab({
+local E = Window:CreateTab({
     Name = "Location",
     Icon = "rbxassetid://8192162908",
     PremiumOnly = false
 })
 
-local RA = Window:MakeTab({
+local RA = Window:CreateTab({
     Name = "Raid",
     Icon = "rbxassetid://8192162908",
     PremiumOnly = false
 })
 
-local LC = Window:MakeTab({
+local LC = Window:CreateTab({
     Name = " Self",
     Icon = "rbxassetid://8192162908",
     PremiumOnly = false
 })
 
-local SV = Window:MakeTab({
+local SV = Window:CreateTab({
     Name = " Information Sever",
     Icon = "rbxassetid://8192162908",
     PremiumOnly = false
 })
 
-local D = Window:MakeTab({
+local D = Window:CreateTab({
     Name = " Devil's fruit",
     Icon = "rbxassetid://8192162908",
     PremiumOnly = false
 })
 
-local R = Window:MakeTab({
+local R = Window:CreateTab({
     Name = " Clan V4",
     Icon = "rbxassetid://8192162908",
     PremiumOnly = false
 })
 
-local SH = Window:MakeTab({
+local SH = Window:CreateTab({
     Name = " Shop",
     Icon = "rbxassetid://8192162908",
     PremiumOnly = false
 })
 
-local C = Window:MakeTab({
+local C = Window:CreateTab({
     Name = " Other",
     Icon = "rbxassetid://8192162908",
     PremiumOnly = false
 })
 
 -----Label--------------------
-local Section = W:AddSection({
+local Section = W:CreateSection({
     Name = "Credit"
 })
 
 
-W:AddLabel("By BinbinvoGaming")
+W:CreateLabel("By BinbinvoGaming")
 
-local Section = W:AddSection({
+local Section = W:CreateSection({
     Name = "Update"
 })
 
 
-W:AddLabel("Developed by BinbinvoGaming Studio")
-W:AddLabel("BinbinvoGaming Hub Roblox")
-W:AddLabel("Discord:binbinvogaming_vn2")
-local Section = W:AddSection({
+W:CreateLabel("Developed by BinbinvoGaming Studio")
+W:CreateLabel("BinbinvoGaming Hub Roblox")
+W:CreateLabel("Discord:binbinvogaming_vn2")
+local Section = W:CreateSection({
     Name = "Status"
 })
 
-local locallv = W:AddLabel("Level")
+local locallv = W:CreateLabel("Level")
     
     spawn(function()
         while wait() do
@@ -2779,7 +2779,7 @@ local locallv = W:AddLabel("Level")
         end
     end)
     
-    local localrace = W:AddLabel("Race")
+    local localrace = W:CreateLabel("Race")
     
     spawn(function()
         while wait() do
@@ -2789,7 +2789,7 @@ local locallv = W:AddLabel("Level")
         end
     end)
     
-    local localbeli = W:AddLabel("Beli")
+    local localbeli = W:CreateLabel("Beli")
     
     spawn(function()
         while wait() do
@@ -2799,7 +2799,7 @@ local locallv = W:AddLabel("Level")
         end
     end)
     
-    local localfrag = W:AddLabel("Fragment")
+    local localfrag = W:CreateLabel("Fragment")
     
     spawn(function()
         while wait() do
@@ -2810,7 +2810,7 @@ local locallv = W:AddLabel("Level")
     end)
     
     
-    local localexp = W:AddLabel("ExP")
+    local localexp = W:CreateLabel("ExP")
     
     spawn(function()
         while wait() do
@@ -2820,7 +2820,7 @@ local locallv = W:AddLabel("Level")
         end
     end)
     
-    local localstat = W:AddLabel("Stats Points")
+    local localstat = W:CreateLabel("Stats Points")
     
     spawn(function()
         while wait() do
@@ -2830,7 +2830,7 @@ local locallv = W:AddLabel("Level")
         end
     end)
     
-    local localbountyhornor = W:AddLabel("Bounty")
+    local localbountyhornor = W:CreateLabel("Bounty")
     
     spawn(function()
         while wait() do
@@ -2840,7 +2840,7 @@ local locallv = W:AddLabel("Level")
         end
     end)
     
-    local localDevil = W:AddLabel("Devil Fruit")
+    local localDevil = W:CreateLabel("Devil Fruit")
     
     spawn(function()
         while wait() do
@@ -2854,7 +2854,7 @@ local locallv = W:AddLabel("Level")
         end
     end)
 
-local Section = M:AddSection({
+local Section = M:CreateSection({
     Name = "Select Weapon"
 })
 
@@ -2862,7 +2862,7 @@ local Section = M:AddSection({
 
 local WeaponList = {"Melee","Sword","Fruit","Gun"}
 _G.SelectWeapon = "Melee"
-M:AddDropdown({
+M:CreateDropdown({
     Name = "Select Weapon",
     Default = "",
     Options = WeaponList,
@@ -2913,11 +2913,11 @@ task.spawn(function()
     end)
 
 if World2 and World1 then
-    local Section = M:AddSection({
+    local Section = M:CreateSection({
         Name = "BOOTS"
     })
 
-    M:AddButton({
+    M:CreateButton({
         Name = "BOOST FPS",
         Callback = function()
             pcall(function()
@@ -2969,7 +2969,7 @@ if World2 and World1 then
     })
 end
 
-    local Section = M:AddSection({
+    local Section = M:CreateSection({
         Name = "Other Farm"
     })
 
@@ -3007,7 +3007,7 @@ end
     
     
     
-    M:AddButton({
+    M:CreateButton({
         Name = "Redeem all code",
         Callback = function()
             function RedeemCode(value)
@@ -3019,7 +3019,7 @@ end
           end    
     })
 
-    local Section = M:AddSection({
+    local Section = M:CreateSection({
         Name = "Auto Farm Level"
     })
 
@@ -3046,7 +3046,7 @@ M:CreateToggle({
     end    
 })
 
-local Section = M:AddSection({
+local Section = M:CreateSection({
     Name = "Mastery Menu"
 })
 
@@ -3148,7 +3148,7 @@ M:CreateToggle({
         end    
     })
 
-    local Section = M:AddSection({
+    local Section = M:CreateSection({
         Name = "Bring Mob"
     })
 
@@ -3163,7 +3163,7 @@ M:CreateToggle({
 })
 local Bring = {"Low", "Normal", "Super Bring"}
 _G.BringMode = "Normal"
-M:AddDropdown({
+M:CreateDropdown({
     Name = "Bring Mode",
     Default = "Normal",
     Options = Bring,
@@ -3190,7 +3190,7 @@ spawn(function()
     end
 end)
 
-local Section = M:AddSection({
+local Section = M:CreateSection({
     Name = "FastAttack :"
 })
 
@@ -3237,7 +3237,7 @@ spawn(function()
 end)
 
 local AttackList = {"0", "0.1", "0.175", "0.2", "0.25", "0.3", "0.35", "0.4", "0.45", "0.5", "0.55", "0.6", "0.65", "0.7", "0.75", "0.8", "0.85", "0.9", "0.95", "0.1"}
-M:AddDropdown({
+M:CreateDropdown({
 	Name = "FastAttack Delay",
 	Default = "0.5",
 	Options = AttackList,
@@ -3297,7 +3297,7 @@ spawn(function()
     end
 end)
 
-local Section = M:AddSection({
+local Section = M:CreateSection({
     Name = "Distance Mobs"
 })
 
@@ -3318,7 +3318,7 @@ M:AddSlider({
     end    
 })
 
-local Section = M:AddSection({
+local Section = M:CreateSection({
     Name = "Farm Fast : Lv 10 => 120 (erorrs)"
 })
 
@@ -3333,7 +3333,7 @@ Farmfasttoggle = M:CreateToggle({
     end    
 })
 
-local Section = M:AddSection({
+local Section = M:CreateSection({
     Name = "Kaitun dỏm"
 })
 
@@ -3399,12 +3399,12 @@ spawn(function()
     end
 end)
 
-   local Section = M:AddSection({
+   local Section = M:CreateSection({
     Name = "Mob & Boss Farm"
 })
 
 if World1 then
-    M:AddDropdown({
+    M:CreateDropdown({
         Name = "Select Mobs",
         Default = "",
         Options = {"Bandit","Monkey","Gorilla","Pirate","Brute","Desert Bandit","Desert Officer","Snow Bandit","Snowman","Chief Petty Officer","Sky Bandit","Dark Master","Prisoner", "Dangerous Prisoner","Toga Warrior","Gladiator","Military Soldier","Military Spy","Fishman Warrior","Fishman Commando","God's Guard","Shanda","Royal Squad","Royal Soldier","Galley Pirate ","Galley Captain"},
@@ -3415,7 +3415,7 @@ if World1 then
     end
     
     if World2 then
-    M:AddDropdown({
+    M:CreateDropdown({
         Name = "Select Mobs",
         Default = "",
         Options = {"Raider","Mercenary","Swan Pirate","Factory Staff","Marine Lieutenant","Marine Captain","Zombie","Vampire","Snow Trooper","Winter Warrior","Lab Subordinate","Horned Warrior","Magma Ninja","Lava Pirate","Ship Deckhand","Ship Engineer","Ship Steward","Ship Officer","Arctic Warrior","Snow Lurker","Sea Soldier","Water Fighter"},
@@ -3426,7 +3426,7 @@ if World1 then
     end
     
     if World3 then
-    M:AddDropdown({
+    M:CreateDropdown({
         Name = "Select Mobs",
         Default = "",
         Options = {"Pirate Millionaire","Dragon Crew Warrior","Dragon Crew Archer","Female Islander","Giant Islander","Marine Commodore","Marine Rear Admiral","Fishman Raider","Fishman Captain","Forest Pirate","Mythological Pirate","Jungle Pirate","Musketeer Pirate","Reborn Skeleton","Living Zombie","Demonic Soul","Posessed Mummy", "Peanut Scout", "Peanut President", "Ice Cream Chef", "Ice Cream Commander", "Cookie Crafter", "Cake Guard", "Baking Staff", "Head Baker", "Cocoa Warrior", "Chocolate Bar Battler", "Sweet Thief", "Candy Rebel", "Candy Pirate", "Snow Demon"},
@@ -3444,7 +3444,7 @@ if World1 then
         end    
     }) 
 
-local Section = M:AddSection({
+local Section = M:CreateSection({
     Name = "Nearest Farm"
 })
 
@@ -3459,7 +3459,7 @@ M:CreateToggle({
     end    
 })
 
-    local Section = M:AddSection({
+    local Section = M:CreateSection({
         Name = "Chest Farm"
     })
 
@@ -3505,11 +3505,11 @@ spawn(function()
 end
 end)
 
-local Section = M:AddSection({
+local Section = M:CreateSection({
     Name = "Bone Menu"
 })
 
-local Bone = M:AddLabel("Bone : ")
+local Bone = M:CreateLabel("Bone : ")
 
 spawn(function()
     while wait() do
@@ -3549,11 +3549,11 @@ ToggleRandom = M:CreateToggle({
         end)
     end)
     
-    local Section = M:AddSection({
+    local Section = M:CreateSection({
         Name = "Other Menu"
     })
 
-local EliteProgress = M:AddLabel("")
+local EliteProgress = M:CreateLabel("")
 
     spawn(function()
         pcall(function()
@@ -3596,7 +3596,7 @@ local EliteProgress = M:AddLabel("")
                 StopTween(_G.RaidPirate)
             end    
         })
-        local Section = M:AddSection({
+        local Section = M:CreateSection({
             Name = "Dough King Menu"
         })
         
@@ -3641,13 +3641,13 @@ local EliteProgress = M:AddLabel("")
             end    
         })
 
-local Section = M:AddSection({
+local Section = M:CreateSection({
     Name = "Boss"
 })
 
 
 
-    local Section = M:AddSection({
+    local Section = M:CreateSection({
         Name = "Observation Haki"
     })
 
@@ -3672,7 +3672,7 @@ local Section = M:AddSection({
         end    
     })
 
-    local Section = M:AddSection({
+    local Section = M:CreateSection({
         Name = "Melee v2"
     })
     
@@ -3806,11 +3806,11 @@ elseif _G.WhiteScreen == false then
         end    
     })
 
-local Section = IQ:AddSection({
+local Section = IQ:CreateSection({
     Name = "Saber Menu"
 })
 
-local SaberBoss = IQ:AddLabel("Boss Saber : ")
+local SaberBoss = IQ:CreateLabel("Boss Saber : ")
 spawn(function()
     while wait() do
         pcall(function()
@@ -3845,11 +3845,11 @@ IQ:CreateToggle({
     end    
 })
 
-local Section = IQ:AddSection({
+local Section = IQ:CreateSection({
     Name = "Pole V.1"
 })
 
-local PoleBoss = IQ:AddLabel("Boss Thunder God : ")
+local PoleBoss = IQ:CreateLabel("Boss Thunder God : ")
 spawn(function()
     while wait() do
         pcall(function()
@@ -3883,7 +3883,7 @@ TogglePolev1Hop = IQ:CreateToggle({
     end    
 })
 
-local Section = IQ:AddSection({
+local Section = IQ:CreateSection({
     Name = "Second Sea"
 })
 
@@ -3898,7 +3898,7 @@ IQ:CreateToggle({
     end    
 })
 
-local Section = IQ:AddSection({
+local Section = IQ:CreateSection({
     Name = "Vampire"
 })
 IQ:CreateToggle({
@@ -3913,7 +3913,7 @@ IQ:CreateToggle({
 })
 
 
-local Section = IQ:AddSection({
+local Section = IQ:CreateSection({
     Name = "SuperHuman"
 })
 
@@ -3928,7 +3928,7 @@ IQ:CreateToggle({
     end    
 })
 
-local Section = IQ:AddSection({
+local Section = IQ:CreateSection({
     Name = "Bartilo"
 })
 
@@ -3945,7 +3945,7 @@ BartiloToggle = IQ:CreateToggle({
     end    
 })
 
-local Section = IQ:AddSection({
+local Section = IQ:CreateSection({
     Name = "Next Sea Third"
 })
 
@@ -3971,7 +3971,7 @@ IQ:CreateToggle({
     end    
 })
 
-local Section = IQ:AddSection({
+local Section = IQ:CreateSection({
     Name = "Buddy Sword"
 })
 
@@ -3996,7 +3996,7 @@ IQ:CreateToggle({
     end    
 })
 
-    local Section = IQ:AddSection({
+    local Section = IQ:CreateSection({
         Name = "Soul Guita"
     })
 
@@ -4032,7 +4032,7 @@ IQ:CreateToggle({
     end    
 })
 
-local Section = IQ:AddSection({
+local Section = IQ:CreateSection({
     Name = "Auto Dual Curset Katana[Not Work]"
 })
 
@@ -4047,7 +4047,7 @@ IQ:CreateToggle({
     end    
 })
 
-local Section = IQ:AddSection({
+local Section = IQ:CreateSection({
     Name = "Tushita"
 })
 
@@ -4073,7 +4073,7 @@ IQ:CreateToggle({
     end  
 })
 
-local Section = IQ:AddSection({
+local Section = IQ:CreateSection({
     Name = "Cavander"
 })
 
@@ -4098,7 +4098,7 @@ IQ:CreateToggle({
     end    
 })
 
-        local Section = IQ:AddSection({
+        local Section = IQ:CreateSection({
             Name = "Twin Hook"
         })
 
@@ -4123,11 +4123,11 @@ IQ:CreateToggle({
             end    
         })
         
-        local Section = IQ:AddSection({
+        local Section = IQ:CreateSection({
             Name = "ArenaTrainer"
         })
 
-        IQ:AddLabel("For those who don't understand, this is automatic dummy hitting.")
+        IQ:CreateLabel("For those who don't understand, this is automatic dummy hitting.")
 
         IQ:CreateToggle({
             Name = "Automatically hit the dummy",
@@ -4150,7 +4150,7 @@ IQ:CreateToggle({
             end    
         })
 
-        local Section = IQ:AddSection({
+        local Section = IQ:CreateSection({
             Name = "Seperator Hallow Scythe"
         })
 
@@ -4175,7 +4175,7 @@ ToggleHallow = IQ:CreateToggle({
             end    
         })
 
-        local Section = IQ:AddSection({
+        local Section = IQ:CreateSection({
             Name = "Dark Dragger"
         })
 
@@ -4223,7 +4223,7 @@ ToggleHallow = IQ:CreateToggle({
         end)
     end
 
-    local Section = IQ:AddSection({
+    local Section = IQ:CreateSection({
         Name = "SeaBeast"
     })
 
@@ -4260,7 +4260,7 @@ spawn(function()
     end)
 end)
 
-local Section = IQ:AddSection({
+local Section = IQ:CreateSection({
         Name = "Mirrage Menu"
     })
 
@@ -4348,7 +4348,7 @@ IQ:CreateToggle({
     end    
 })
 
-local Section = S:AddSection({
+local Section = S:CreateSection({
     Name = "Stats Select"
 })
 
@@ -4378,11 +4378,11 @@ spawn(function()
     end
 end)
 
-Chest = S:AddLabel("Chest")
+Chest = S:CreateLabel("Chest")
 
-Fruit = S:AddLabel("Fruit")
+Fruit = S:CreateLabel("Fruit")
 
-  local Pointstat = S:AddLabel("Stat Points")
+  local Pointstat = S:CreateLabel("Stat Points")
     
     spawn(function()
         while wait() do
@@ -4392,11 +4392,11 @@ Fruit = S:AddLabel("Fruit")
         end
     end)
     
-local Melee = S:AddLabel("Melee : ")
-local Defense = S:AddLabel("Defense : ")
-local Sword = S:AddLabel("Sword : ")
-local Gun = S:AddLabel("Gun : ")
-local Fruit = S:AddLabel("Fruit : ")
+local Melee = S:CreateLabel("Melee : ")
+local Defense = S:CreateLabel("Defense : ")
+local Sword = S:CreateLabel("Sword : ")
+local Gun = S:CreateLabel("Gun : ")
+local Fruit = S:CreateLabel("Fruit : ")
 
     spawn(function()
         while wait() do
@@ -4514,7 +4514,7 @@ S:AddSlider({
     end    
 })
 
-local Section = E:AddSection({
+local Section = E:CreateSection({
     Name = "ESP MENU"
 })
 
@@ -4739,9 +4739,9 @@ function UpdateFlowerChams()
     end
 end
 
-local TimeRaid = RA:AddLabel("Wait For Dungeon")
+local TimeRaid = RA:CreateLabel("Wait For Dungeon")
 
-local checkisland = RA:AddLabel("Island : Not Raid")
+local checkisland = RA:CreateLabel("Island : Not Raid")
 
 _G.SelectChip = selectraids or ""
     Raidslist = {}
@@ -4754,7 +4754,7 @@ _G.SelectChip = selectraids or ""
     end
 
 
-    RA:AddDropdown({
+    RA:CreateDropdown({
         Name = "Select Chips",
         Default = "",
         Options = Raidslist,
@@ -4767,14 +4767,14 @@ _G.SelectChip = selectraids or ""
 
 
 
-RA:AddButton({
+RA:CreateButton({
     Name = "Buy Chip",
     Callback = function()
           _G.AutoBuyChip = value
       end    
 })
 
-RA:AddButton({
+RA:CreateButton({
     Name = "Buy Chips Select",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("RaidsNpc","Select",_G.SelectChip)
@@ -4792,7 +4792,7 @@ RA:CreateToggle({
 })
 
 
-local Section = RA:AddSection({
+local Section = RA:CreateSection({
     Name = "Raid Menu"
 })
 
@@ -4827,7 +4827,7 @@ RA:CreateToggle({
     end    
 })
 
-local Section = RA:AddSection({
+local Section = RA:CreateSection({
     Name = "Raid Law Menu"
 })
 
@@ -4862,13 +4862,13 @@ RA:CreateToggle({
     end    
 })
 
-local Section = LC:AddSection({
+local Section = LC:CreateSection({
     Name = "Teleport Island"
 })
 
 
 if World1 then
-LC:AddDropdown({
+LC:CreateDropdown({
     Name = "Select Island",
     Default = "",
     Options = {"WindMill",
@@ -4898,7 +4898,7 @@ LC:AddDropdown({
 end
 
 if World2 then
-LC:AddDropdown({
+LC:CreateDropdown({
     Name = "Select Island",
     Default = "",
     Options = {"The Cafe",
@@ -4926,7 +4926,7 @@ LC:AddDropdown({
 end
 
 if World3 then
-LC:AddDropdown({
+LC:CreateDropdown({
     Name = "Select Island",
     Default = "",
     Options = {"Mansion",
@@ -5064,7 +5064,7 @@ LC:CreateToggle({
     end    
 })
 
-local Section = LC:AddSection({
+local Section = LC:CreateSection({
     Name = "Teleport NPC"
 })
 
@@ -5117,7 +5117,7 @@ NPC3 = {
 }
 
 if World1 then
-LC:AddDropdown({
+LC:CreateDropdown({
 	Name = "Select NPC",
 	Default = "",
 	Options = NPC1,
@@ -5129,7 +5129,7 @@ LC:AddDropdown({
 })
 end
 if World2 then
-    LC:AddDropdown({
+    LC:CreateDropdown({
         Name = "Select NPC",
         Default = "",
         Options = NPC2,
@@ -5141,7 +5141,7 @@ if World2 then
     })
 end
     if World3 then
-        LC:AddDropdown({
+        LC:CreateDropdown({
             Name = "Select NPC",
             Default = "",
             Options = NPC3,
@@ -5246,27 +5246,27 @@ end
         StopTween(_G.TeleportNPC)
             end    
         })
-LC:AddButton({
+LC:CreateButton({
     Name = "Old World",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelMain")
       end    
 })
 
-LC:AddButton({
+LC:CreateButton({
     Name = "Second World",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
       end    
 })
 
-LC:AddButton({
+LC:CreateButton({
     Name = "Third World",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
       end    
 })
-        local Section = LC:AddSection({
+        local Section = LC:CreateSection({
             Name = "Teleport SeSeabeast"
         })
 
@@ -5284,11 +5284,11 @@ LC:CreateToggle({
     end    
 })
 
-local Section = LC:AddSection({
+local Section = LC:CreateSection({
     Name = "Teleport Mirrage"
 })
 
-LC:AddButton({
+LC:CreateButton({
     Name = "Revome Frog",
     Callback = function()
         game:GetService("Lighting").LightingLayers:Destroy()
@@ -5307,7 +5307,7 @@ LC:CreateToggle({
     end    
 })
 
-local Section = LC:AddSection({
+local Section = LC:CreateSection({
     Name = "Players"
 })
 
@@ -5333,7 +5333,7 @@ Playerslist = {}
         table.insert(Playerslist,v.Name)
     end
     
-local SelectedPly = LC:AddDropdown({
+local SelectedPly = LC:CreateDropdown({
     Name = "Select Players",
     Default = "",
     Options = Playerslist,
@@ -5342,7 +5342,7 @@ local SelectedPly = LC:AddDropdown({
     end    
 })
 
-LC:AddButton({
+LC:CreateButton({
     Name = "Refresh Players",
     Callback = function()
         NewPlayerList = {}
@@ -5377,7 +5377,7 @@ LC:CreateToggle({
     end    
 })
 
-local Section = LC:AddSection({
+local Section = LC:CreateSection({
     Name = "AimBot"
 })
 
@@ -5403,11 +5403,11 @@ LC:CreateToggle({
     end    
 })
 
-local Section = SV:AddSection({
+local Section = SV:CreateSection({
     Name = "FullMoon Check"
 })
 
-local FM = SV:AddLabel("Server Time : " .. function8() .. " | ".. CheckMoon() .. " | " .. function7())
+local FM = SV:CreateLabel("Server Time : " .. function8() .. " | ".. CheckMoon() .. " | " .. function7())
 
 spawn(function()
         while wait() do
@@ -5415,17 +5415,17 @@ spawn(function()
                 end
             end)
 
-            local Section = SV:AddSection({
+            local Section = SV:CreateSection({
                 Name = "Anclient One Check"
             })
 
-            local bL = SV:AddLabel("Anclient One Status : " .. tostring(CheckAcientOneStatus()))
+            local bL = SV:CreateLabel("Anclient One Status : " .. tostring(CheckAcientOneStatus()))
 
-local Section = SV:AddSection({
+local Section = SV:CreateSection({
     Name = "Elite Check"
 })
 
-local Elite_Hunter_Status = SV:AddLabel("Only Third Sea")
+local Elite_Hunter_Status = SV:CreateLabel("Only Third Sea")
     
     
         spawn(function()
@@ -5440,11 +5440,11 @@ local Elite_Hunter_Status = SV:AddLabel("Only Third Sea")
             end
         end)
 
-        local Section = SV:AddSection({
+        local Section = SV:CreateSection({
             Name = "Elite Hunter"
         })
 
-        local EliteProgress = SV:AddLabel("")
+        local EliteProgress = SV:CreateLabel("")
     
         spawn(function()
             pcall(function()
@@ -5454,7 +5454,7 @@ local Elite_Hunter_Status = SV:AddLabel("Only Third Sea")
             end)
         end)
     
-        local Section = SV:AddSection({
+        local Section = SV:CreateSection({
             Name = "Mirage Check"
         })
 
@@ -5471,13 +5471,13 @@ local Elite_Hunter_Status = SV:AddLabel("Only Third Sea")
     end)
 end
 
-Mirragecheck = SV:AddLabel("Only Third Sea")
+Mirragecheck = SV:CreateLabel("Only Third Sea")
 
-local Section = SV:AddSection({
+local Section = SV:CreateSection({
     Name = "Dough King Check"
 })
 
-local MobKilled = SV:AddLabel("Only Third Sea")
+local MobKilled = SV:CreateLabel("Only Third Sea")
 
 spawn(function()
     while wait() do
@@ -5495,7 +5495,7 @@ spawn(function()
     end
 end)
 
-local Section = SV:AddSection({
+local Section = SV:CreateSection({
     Name = "Hop Find"
 })
 
@@ -5520,7 +5520,7 @@ SV:CreateToggle({
 })
 
 
-local Section = SV:AddSection({
+local Section = SV:CreateSection({
     Name = "Misc Sever"
 })
 
@@ -5533,7 +5533,7 @@ local Section = SV:AddSection({
             end	  
         })
 
-        SV:AddButton({
+        SV:CreateButton({
             Name = "Join Id",
             Callback = function()
                 _G.AutoRejoin = false
@@ -5541,14 +5541,14 @@ local Section = SV:AddSection({
               end    
         })
 
-        SV:AddButton({
+        SV:CreateButton({
             Name = "Copy Job Id",
             Callback = function()
                 setclipboard(tostring(game.JobId))
               end    
             })
 
-        SV:AddButton({
+        SV:CreateButton({
             Name = "Hop Sever",
             Callback = function()
                 _G.AutoRejoin = false
@@ -5556,14 +5556,14 @@ local Section = SV:AddSection({
               end    
         })
 
-        SV:AddButton({
+        SV:CreateButton({
             Name = "Rejoin Sever",
             Callback = function()
                 game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
               end    
         })
 
-        SV:AddButton({
+        SV:CreateButton({
             Name = "Hop Sever Low Players",
             Callback = function()
                 _G.AutoRejoin = false
@@ -5614,7 +5614,7 @@ local Section = SV:AddSection({
               end    
         })
 
-D:AddButton({
+D:CreateButton({
     Name = "Random Fruits",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Cousin","Buy")
@@ -5803,7 +5803,7 @@ spawn(function()
     end
 end)
 
-local Section = R:AddSection({
+local Section = R:CreateSection({
 	Name = "Race v2"
 })
 
@@ -5817,7 +5817,7 @@ R:CreateToggle({
 	end    
 })
 
-local Section = R:AddSection({
+local Section = R:CreateSection({
 	Name = "Pull Lever"
 })
 
@@ -5894,7 +5894,7 @@ spawn(function()
     end
 end)
 
-R:AddButton({
+R:CreateButton({
     Name = "Teleport to Gear",
     Callback = function()
         _G.TweenMGear = Value
@@ -5902,7 +5902,7 @@ R:AddButton({
       end    
 })
 
-local Section = R:AddSection({
+local Section = R:CreateSection({
 	Name = "Race v4"
 })
 
@@ -5948,32 +5948,32 @@ R:CreateToggle({
     end    
 })
 
-local Section = R:AddSection({
+local Section = R:CreateSection({
 	Name = "Temple Of Time"
 })
 
-R:AddButton({
+R:CreateButton({
     Name = "Teleport to Top On Great Tree",
     Callback = function()
         TweenTempleLegit()
       end    
 })
 
-R:AddButton({
+R:CreateButton({
     Name = "Teleport to Temple of Time",
     Callback = function()
         Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875)
       end    
 })
 
-R:AddButton({
+R:CreateButton({
     Name = "Teleport to Lever Pull",
     Callback = function()
         PullLever()
       end    
 })
 
-R:AddButton({
+R:CreateButton({
     Name = "Teleport to Anclient One",
     Callback = function()
         Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875)
@@ -5983,7 +5983,7 @@ R:AddButton({
       end    
 })
 
-R:AddButton({
+R:CreateButton({
     Name = "Teleport to Clock",
     Callback = function()
         Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875)
@@ -5993,7 +5993,7 @@ R:AddButton({
       end    
 })
 
-R:AddButton({
+R:CreateButton({
     Name = "Teleport to Trials Doors",
     Callback = function()
         Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875)
@@ -6033,7 +6033,7 @@ R:AddButton({
             end
 })
 
-local Section = R:AddSection({
+local Section = R:CreateSection({
     Name = "Other Trials"
 })
 
@@ -6060,32 +6060,32 @@ R:CreateToggle({
     end
 })
 
-local Section = SH:AddSection({
+local Section = SH:CreateSection({
     Name = "Melee"
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Black Leg",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyBlackLeg")
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Electrol",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectro")
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "FishMan Karate",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyFishmanKarate")
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Dragon Claw",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","1")
@@ -6093,7 +6093,7 @@ SH:AddButton({
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "SuperHuman",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySuperhuman")
@@ -6101,21 +6101,21 @@ SH:AddButton({
 })
 
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Death Step",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDeathStep")
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Electric Claw",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectricClaw")
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "SharkMan Karate",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySharkmanKarate",true)
@@ -6123,46 +6123,46 @@ SH:AddButton({
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Dragon Talon",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDragonTalon")
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Godhuman",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyGodhuman")
       end    
 })
 
-local Section = SH:AddSection({
+local Section = SH:CreateSection({
     Name = "Haki :"
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Buy Buso Haki",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyHaki","Buso")
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Buy Geppo Haki",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyHaki","Geppo")
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Buy Flash Step(Soru)",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyHaki","Soru")
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Buy Observation(Ken) Haki",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("KenTalk","Buy")
@@ -6171,11 +6171,11 @@ SH:AddButton({
 
 
 
-local Section = SH:AddSection({
+local Section = SH:CreateSection({
     Name = "Race :"
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Buy Ghoul Race :",
     Callback = function()
         local a = {
@@ -6193,7 +6193,7 @@ SH:AddButton({
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Buy Ghoul Race :",
     Callback = function()
         local a = {
@@ -6204,113 +6204,113 @@ SH:AddButton({
       end    
 })
 
-local Section = SH:AddSection({
+local Section = SH:CreateSection({
     Name = "Other"
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Cutlass Katana",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Cutlass")
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Katana",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Katana")
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Iron Mace",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Iron Mace")
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Dual Katana",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Duel Katana")
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Triple Katana",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Triple Katana")
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Pipe",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Pipe")
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Dual-Headed Blade ",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Dual-Headed Blade")
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Bisento",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Bisento")
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Soul Cane",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Soul Cane")
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Pole v.2 [ 5,000 Fragments ]",
     Callback = function()
         game.ReplicatedStorage.Remotes.CommF_:InvokeServer("ThunderGodTalk")
       end    
 })
 
-local Section = SH:AddSection({
+local Section = SH:CreateSection({
     Name = "Gun"
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Slingshot",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Slingshot")
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Musket",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Musket")
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Flintlock",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Flintlock")
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Refined Slingshot",
     Callback = function()
           game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Refined Flintlock")
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Refined Flintlock",
     Callback = function()
         local args = {
@@ -6321,14 +6321,14 @@ SH:AddButton({
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Cannon",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Cannon")
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Kabucha [ 1,500 Fragments]",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Slingshot","1")
@@ -6336,7 +6336,7 @@ SH:AddButton({
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Bizarre Rifle [ 250 Ectoplasm ]",
     Callback = function()
         local A_1 = "Ectoplasm"
@@ -6352,7 +6352,7 @@ SH:AddButton({
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Refund Stats[2,500 fragment]",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","1")
@@ -6360,7 +6360,7 @@ SH:AddButton({
       end    
 })
 
-SH:AddButton({
+SH:CreateButton({
     Name = "Race Random[3,000 fragment]",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Reroll","1")
@@ -6368,18 +6368,18 @@ SH:AddButton({
       end    
 })
 
-C:AddButton({
+C:CreateButton({
     Name = "Link Discord",
     Callback = function(value)
         setclipboard("https://discord.gg/xFZHte86EH")
     end
 })
 
-local Section = C:AddSection({
+local Section = C:CreateSection({
     Name = "Open Tab"
 })
 
-C:AddButton({
+C:CreateButton({
     Name = "Open Devil Fruit Shop",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("GetFruits")
@@ -6387,7 +6387,7 @@ C:AddButton({
       end    
 })
 
-C:AddButton({
+C:CreateButton({
     Name = "Open Inventory[Old]",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("getInventoryWeapons")
@@ -6396,7 +6396,7 @@ C:AddButton({
       end    
 })
 
-C:AddButton({
+C:CreateButton({
     Name = "Title Tab",
     Callback = function()
         local args = {
@@ -6407,11 +6407,11 @@ C:AddButton({
       end    
 })
 
-local Section = C:AddSection({
+local Section = C:CreateSection({
     Name = "Color Haki"
 })
 
-C:AddButton({
+C:CreateButton({
     Name = "Color Haki",
     Callback = function()
         game.Players.localPlayer.PlayerGui.Main.Colors.Visible = true
@@ -6441,7 +6441,7 @@ spawn(function()
     end
 end)
 
-local Section = C:AddSection({
+local Section = C:CreateSection({
     Name = "Level Lock"
 })
 
@@ -6496,7 +6496,7 @@ spawn(function()
     end)
 
 
-    local Section = C:AddSection({
+    local Section = C:CreateSection({
         Name = "Rejoin"
     })
 
@@ -6519,7 +6519,7 @@ spawn(function()
         end
     end)
 
-    local Section = C:AddSection({
+    local Section = C:CreateSection({
         Name = "Players"
     })
 
@@ -6542,7 +6542,7 @@ spawn(function()
         end
     end)
 
-    local Section = C:AddSection({
+    local Section = C:CreateSection({
         Name = "Misc Players"
     })
 
@@ -6595,7 +6595,7 @@ spawn(function()
     end)
 
 
-C:AddButton({
+C:CreateButton({
     Name = "Remove Lava",
     Callback = function()
         for i,v in pairs(game.Workspace:GetDescendants()) do
@@ -8361,7 +8361,7 @@ pcall(function()
     while wait() do
         if _G.AutoEliteHunter then
             if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-                OrionLib:MakeNotification({
+                OrionLib:Notify({
                     Name = "BinbinvoGaming Hub(Noitification)",
                     Content = "[EN] : Please cancel the farm level quest (if any)",
                     Image = "rbxassetid://8192162908",
@@ -8530,7 +8530,7 @@ spawn(function()
         while wait() do
             if _G.AutoObservation then
                 if game:GetService("Players").LocalPlayer.VisionRadius.Value >= 3000 then
-                    OrionLib:MakeNotification({
+                    OrionLib:Notify({
                         Name = "BinbinvoGaming Hub BOT",
                         Content = "!!You Are Max Point!!",
                         Image = "rbxassetid://14919714384",
@@ -8679,7 +8679,7 @@ spawn(function()
     if _G.AutoSharkman then
         if Mybeli <= 2500000 or MyFragment <= 5000 then
             wait(2.0)
-            OrionLib:MakeNotification({
+            OrionLib:Notify({
                 Name = "BinbinvoGaming Hub",
                 Content = "You not have beli or fragment!",
                 Image = "rbxassetid://8192162908",
@@ -8840,7 +8840,7 @@ spawn(function()
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDeathStep")
                         end
                     else
-                        OrionLib:MakeNotification({
+                        OrionLib:Notify({
                             Name = "BinbinvoGaming Hub BOT",
                             Content = "Not Have Superhuman",
                             Image = "rbxassetid://14919714384",
@@ -8853,7 +8853,7 @@ spawn(function()
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySharkmanKarate")
                         end
                     else
-                        OrionLib:MakeNotification({
+                        OrionLib:Notify({
                             Name = "BinbinvoGaming Hub BOT",
                             Content = "Not Have Death Step",
                             Image = "rbxassetid://14919714384",
@@ -8866,7 +8866,7 @@ spawn(function()
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectricClaw")
                         end
                     else
-                        OrionLib:MakeNotification({
+                        OrionLib:Notify({
                             Name = "BinbinvoGaming Hub BOT",
                             Content = "Not Have SharkMan Karate",
                             Image = "rbxassetid://14919714384",
@@ -8879,7 +8879,7 @@ spawn(function()
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDragonTalon")
                         end
                     else
-                        gOrionLib:MakeNotification({
+                        gOrionLib:Notify({
                             Name = "BinbinvoGaming Hub BOT",
                             Content = "Not Have Electric Claw",
                             Image = "rbxassetid://14919714384",
@@ -8890,7 +8890,7 @@ spawn(function()
                     if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDragonTalon",true) == 1 then
                         if game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Talon") and game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Talon").Level.Value >= 400 or game.Players.LocalPlayer.Character:FindFirstChild("Dragon Talon") and game.Players.LocalPlayer.Character:FindFirstChild("Dragon Talon").Level.Value >= 400 then
                             if string.find(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyGodhuman",true), "Bring") then
-                                OrionLib:MakeNotification({
+                                OrionLib:Notify({
                                     Name = "BinbinvoGaming Hub BOT",
                                     Content = "Not Have Enough Material",
                                     Image = "rbxassetid://14919714384",
@@ -8902,7 +8902,7 @@ spawn(function()
                             end
                         end
                     else
-                        OrionLib:MakeNotification({
+                        OrionLib:Notify({
                             Name = "BinbinvoGaming Hub BOT",
                             Content = "You Not Have Dragon Talon! ",
                             Image = "rbxassetid://14919714384",
@@ -11302,7 +11302,7 @@ spawn(function()
             if _G.Hopfindmoon then
             if game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149052" or game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149431" then
                 wait(2.0)
-                OrionLib:MakeNotification({
+                OrionLib:Notify({
                     Name = "BinbinvoGaming Hub",
                     Content = "Turn Off Hop Find Moon Please",
                     Image = "rbxassetid://8192162908",
@@ -11310,7 +11310,7 @@ spawn(function()
                 })
             elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709143733" then
                 Hop()
-                OrionLib:MakeNotification({
+                OrionLib:Notify({
                     Name = "BinbinvoGaming Hub",
                     Content = "Hop Server",
                     Image = "rbxassetid://8192162908",
@@ -11318,7 +11318,7 @@ spawn(function()
                 })
             elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709150401" then
                 Hop()
-                OrionLib:MakeNotification({
+                OrionLib:Notify({
                     Name = "BinbinvoGaming Hub",
                     Content = "Hop Server",
                     Image = "rbxassetid://8192162908",
@@ -11326,7 +11326,7 @@ spawn(function()
                 })
             elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149680" then
                 Hop()
-                OrionLib:MakeNotification({
+                OrionLib:Notify({
                     Name = "BinbinvoGaming Hub",
                     Content = "Hop Server",
                     Image = "rbxassetid://8192162908",
@@ -11339,7 +11339,7 @@ spawn(function()
         end
     end)
 
-OrionLib:MakeNotification({
+OrionLib:Notify({
         Name = "BinbinvoGaming Hub",
         Content = "Loading script complete!, You can now enable the function!",
         Image = "rbxassetid://8192162908",
@@ -11369,10 +11369,7 @@ spawn(function()
         end
     end)
 end)
-
-OrionLib:Init()
-
-OrionLib:MakeNotification({
+OrionLib:Notify({
     Name = "BinbinvoGaming Hub",
     Content = "Loading Config Complete!!",
     Image = "rbxassetid://8192162908",

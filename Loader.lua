@@ -11,7 +11,7 @@ local Window = Rayfield:CreateWindow({
     },
     KeySystem = false, -- Set to true if you want a key system
 })
-local Speed = 210
+_G.Speed = 210
 function Click()
     game:GetService'VirtualUser':CaptureController()
     game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
@@ -46,18 +46,43 @@ function BTP(p)
         end
     end)
 end
+local Players = game:GetService("Players")
+
+_G.Speed      = 350
+local Players = game:GetService("Players")
 function ATween(Pos)
-    Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == true then game.Players.LocalPlayer.Character.Humanoid.Sit = false end
-    pcall(function() tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),{CFrame = Pos}) end)
-    tween:Play()
-    if Distance <= 350 then
-        tween:Cancel()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
-    end
-    if _G.StopTween == true then
-        tween:Cancel()
-        _G.Clip = false
+    local Pos              = Vector3.new(Pos)
+    local Player           = Players.LocalPlayer
+    local Character        = Player.Character or Player.CharacterAdded:Wait()
+    local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
+    local distance         = (Pos - HumanoidRootPart.Position).Magnitude
+    if distance <= 350 then
+        HumanoidRootPart.CFrame = Pos
+    else
+        -- Nếu khoảng cách lớn hơn 350, sử dụng BodyVelocity để di chuyển
+        local direction       = (Pos - HumanoidRootPart.Position).Unit
+        local bodyVelocity    = Instance.new("BodyVelocity")
+        bodyVelocity.Velocity = direction * _G.Speed
+        bodyVelocity.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+        bodyVelocity.Parent   = HumanoidRootPart
+
+        local connection
+        connection = game:GetService("RunService").Stepped:Connect(function()
+            local distance = (Pos.Position - HumanoidRootPart.Position).Magnitude
+            if distance <= 350 then
+                HumanoidRootPart.CFrame = Pos
+            elseif _G.StopTween then
+                -- Đến gần đích hoặc yêu cầu dừng, hủy BodyVelocity
+                bodyVelocity:Destroy()
+                connection:Disconnect()
+            else
+                for _, v in pairs(Character:GetChildren()) do
+                    if v:IsA("Part") or v:IsA("MeshPart") then
+                        v.CanCollide = false
+                    end
+                end
+            end
+        end)
     end
 end
 function StopTween(target)
@@ -175,7 +200,7 @@ MainTab:CreateSlider({
     Increment = 1,
     CurrentValue = 210,
     Callback = function(Value)
-        Speed = Value
+        _G.Speed = Value
     end,
 })
 
@@ -187,11 +212,10 @@ SettingsTab:CreateInput({
     Callback = function(Pos)
             print(Pos[1],Pos[2],Pos[3])
             Pos = Vector3.new(Pos[1],Pos[2],Pos[3])
-            
             Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
             print('3')
             if game.Players.LocalPlayer.Character.Humanoid.Sit == true then game.Players.LocalPlayer.Character.Humanoid.Sit = false end
-                pcall(function() tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/350, Enum.EasingStyle.Linear),{CFrame = Pos}) end)
+                pcall(function() tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/_G.Speed, Enum.EasingStyle.Linear),{CFrame = Pos}) end)
                 tween:Play()
             if Distance <= 350 then
                 tween:Cancel()
@@ -215,38 +239,71 @@ MainTab:CreateToggle({
 MainTab:CreateToggle({
         Name = "Auto Pirate Raid",
         CurrentValue = false,
-        Callback = function(Value)
-                while wait() do
-                    if _G.RaidPirate then
-                        pcall(function()
-                            local CFrameBoss = CFrame.new(-5496.17432, 313.768921, -2841.53027, 0.924894512, 7.37058015e-09, 0.380223751, 3.5881019e-08, 1, -1.06665446e-07, -0.380223751, 1.12297109e-07, 0.924894512)
-                            if (CFrame.new(-5539.3115234375, 313.800537109375, -2972.372314453125).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 500 then
-                                for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                    if _G.RaidPirate and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                                        if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
-                                            repeat wait()
-                                                AutoHaki()
-                                                EquipWeapon(_G.SelectWeapon)
-                                                v.HumanoidRootPart.CanCollide = false
-                                                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-                                                ATween(v.HumanoidRootPart.CFrame * Pos)
-                                                Click()
-                                            until v.Humanoid.Health <= 0 or not v.Parent or not _G.RaidPirate
-                                        end
+        Callback = function(value)
+            _G.AutoPirateRaid = value
+        end
+    })
+spawn(function()
+    while wait() do
+        if FarmMode == "Quest" and _G.AutoFarm then
+            pcall(function()
+                local QuestTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
+                if not string.find(QuestTitle, NameMon) then
+                    StartMagnet = false
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                end
+                if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                    StartMagnet = false
+                    CheckQuest()
+                    if BypassTP then
+                    if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude > 1500 then
+                    BTP(CFrameQuest)
+                    elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude < 1500 then
+                    ATween(CFrameQuest)
+                    end
+                else
+                    ATween(CFrameQuest)
+                end
+                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude <= 5 then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest",NameQuest,LevelQuest)
+                    end
+                elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+                    CheckQuest()
+                    if game:GetService("Workspace").Enemies:FindFirstChild(Mon) then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                if v.Name == Mon then
+                                    if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) then
+                                        repeat task.wait()
+                                            EquipWeapon(_G.SelectWeapon)
+                                            AutoHaki()                                            
+                                            PosMon = v.HumanoidRootPart.CFrame
+                                            ATween(v.HumanoidRootPart.CFrame * Pos)
+                                            v.HumanoidRootPart.CanCollide = false
+                                            v.Humanoid.WalkSpeed = 0
+                                            v.Head.CanCollide = false
+                                            v.HumanoidRootPart.Size = Vector3.new(70,70,70)
+                                            StartMagnet = true
+                                            game:GetService'VirtualUser':CaptureController()
+                                            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                        until not _G.AutoFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                    else
+                                        StartMagnet = false
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                                     end
                                 end
-                            else
-                                UnEquipWeapon(_G.SelectWeapon)
-                                if BypassTP then
-                                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameBoss.Position).Magnitude > 1500 then
-            			        BTP(CFrameBoss)
-            				    elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameBoss.Position).Magnitude < 1500 then
-            				    ATween(CFrameBoss)
-            					end
-                                end
                             end
-                        end)
+                        end
+                    else
+                        ATween(CFrameMon)
+                        UnEquipWeapon(_G.SelectWeapon)
+                        StartMagnet = false
+                        if game:GetService("ReplicatedStorage"):FindFirstChild(Mon) then
+                         ATween(game:GetService("ReplicatedStorage"):FindFirstChild(Mon).HumanoidRootPart.CFrame * CFrame.new(15,10,2))
+                        end
                     end
                 end
-            end,
-    })
+            end)
+        end
+    end
+end)

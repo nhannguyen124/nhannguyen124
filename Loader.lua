@@ -59,6 +59,15 @@ for _, v in pairs(Player.Character:GetDescendants()) do
         table.insert(BaseParts, v)
     end
 end
+function Brings(Name,Pos)
+	for _, v in pairs(workspace.Enemies:GetChildren()) do
+		if v.Name == Name then
+			v.PrimaryPart.CFrame = CFrame.new(Pos[1],Pos[2],Pos[3])
+			v.Humanoid.WalkSpeed = 0
+			v.Humanoid.JumpPower = 0
+		end
+	end
+end
 local function ATween(TargetPosition)
     local TargetPosition = TargetPosition.Position
     local Character = Player.Character or Player.CharacterAdded:Wait()
@@ -114,6 +123,135 @@ local function ATween(TargetPosition)
         task.wait(timeToMove)
         for i = 1, #BaseParts do
             BaseParts[i].CanCollide = true
+        end
+    end
+end
+local Settings = {
+	AutoClick= true
+}
+local AttackCooldown = 0
+local Player = game.Players.LocalPlayer
+local FastAttack = {
+    Distance = 50,            -- Khoảng cách tối đa để tấn công
+    attackMobs = true,       -- Chỉ định xem có tấn công quái vật không
+    attackPlayers = true,    -- Chỉ định xem có tấn công người chơi không
+    Equipped = nil,          -- Lưu công cụ hiện tại đang trang bị
+    Debounce = 0,            -- Thời gian ngăn chặn tấn công liên tục
+    ComboDebounce = 0,       -- Thời gian ngăn chặn tính toán combo
+    M1Combo = 0               -- Số lượng combo hiện tại
+}
+_G.rz_FastAttack = FastAttack
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RegisterHit = ReplicatedStorage.Modules.Net:FindFirstChild("RE/RegisterHit")
+local RegisterAttack = ReplicatedStorage.Modules.Net:FindFirstChild("RE/RegisterAttack")
+local CachedChars = {}
+function IsAlive(Character: Model?): boolean
+    if Character then
+        local Humanoid, NoCache = CachedChars[Character] or Character.Humanoid
+        
+        if Humanoid then
+            if NoCache ~= true and not CachedChars[Character] then
+                CachedChars[Character] = Humanoid
+            end
+            
+            return Humanoid[if Humanoid.ClassName == "Humanoid" then "Health" else "Value"] > 0
+        end
+    end
+    return false -- Trả về false nếu Character không tồn tại hoặc Humanoid không có
+end
+function FastAttack:GetAllBladeHits(Character)
+	local CFrame = Character:GetPivot().Position -- Lấy vị trí của nhân vật
+	local BladeHits, FirstRootPart = {} -- Khởi tạo danh sách cho các mục tiêu bị tấn công
+	local EnemyList = workspace.Enemies:GetChildren() -- Lấy danh sách tất cả kẻ thù
+
+	-- Duyệt qua danh sách kẻ thù
+	for i = 1, #EnemyList do
+		local Enemy = EnemyList[i]
+		local RootPart = Enemy.PrimaryPart -- Lấy phần gốc (root part) của kẻ thù
+
+		-- Kiểm tra điều kiện để xác định xem kẻ thù có thể bị tấn công hay không
+		if RootPart and IsAlive(Enemy) and Player:DistanceFromCharacter(RootPart.Position) <= self.Distance then
+			if not FirstRootPart then
+				FirstRootPart = RootPart -- Lưu lại phần gốc đầu tiên để tấn công
+			else
+				table.insert(BladeHits, { Enemy, RootPart }) -- Thêm kẻ thù vào danh sách tấn công
+			end
+		end
+	end
+	
+	return FirstRootPart, BladeHits -- Trả về phần gốc đầu tiên và danh sách các mục tiêu bị tấn công
+end
+function FastAttack:GetCombo()
+	local Combo = if tick() - self.ComboDebounce <= 0.35 then self.M1Combo else 0
+	Combo = if Combo >= 4 then 1 else Combo + 1
+	
+	self.ComboDebounce = tick()
+	self.M1Combo = Combo
+	
+	return Combo
+end
+function FastAttack:UseFruitM1(Character, Equipped, Combo)
+	local Position = Character:GetPivot().Position
+	local EnemyList = Enemies:GetChildren()
+	
+	for i = 1, #EnemyList do
+		local Enemy = EnemyList[i]
+		local PrimaryPart = Enemy.PrimaryPart
+		
+		if IsAlive(Enemy) and PrimaryPart and (PrimaryPart.Position - Position).Magnitude <= 50 then
+			local Direction = (PrimaryPart.Position - Position).Unit
+			return Equipped.LeftClickRemote:FireServer(Direction, Combo)
+		end
+	end
+end
+function FastAttack:CheckStun(ToolTip, Character, Humanoid)
+	local Stun = Character:FindFirstChild("Stun")
+	local Busy = Character:FindFirstChild("Busy")
+	if Humanoid.Sit and (ToolTip == "Sword" or ToolTip == "Melee" or ToolTip == "Gun") then
+		return false
+	elseif Stun and Stun.Value > 0 then -- {{ or Busy and Busy.Value }}
+		return false
+	end
+	return true
+end
+function FastAttack:UseNormalClick(Humanoid, Character,Cooldown)
+	local RootPart, BladeHits = self:GetAllBladeHits(Character)
+	
+	if RootPart then
+		RegisterAttack:FireServer(Cooldown)
+		RegisterHit:FireServer(RootPart, BladeHits)
+	end
+end
+function FastAttack.attack()
+    if not Settings.AutoClick or (tick() - AttackCooldown) <= 1 then
+        return 
+    end
+    if not IsAlive(Player.Character) then 
+        return 
+    end
+    local self = FastAttack
+    local Character = Player.Character
+    local Humanoid = Character.Humanoid
+    local Equipped = Character:FindFirstChildOfClass("Tool")
+    local ToolTip = Equipped and Equipped.ToolTip
+    local ToolName = Equipped and Equipped.Name
+    if not Equipped or (ToolTip ~= "Melee" and ToolTip ~= "Blox Fruit" and ToolTip ~= "Sword") then
+        return nil
+    end
+    local Cooldown = Equipped:FindFirstChild("Cooldown") and Equipped.Cooldown.Value or 0.25
+    if (tick() - self.Debounce) >= Cooldown and self:CheckStun(ToolTip, Character, Humanoid) then
+        local Combo = self:GetCombo()
+        Cooldown += if Combo >= 4 then 0.15 else 0
+        self.Equipped = Equipped
+        self.Debounce = if Combo >= 4 then (tick() + 0.15) else tick()
+        if ToolTip == "Blox Fruit" then
+            if ToolName == "Ice-Ice" or ToolName == "Light-Light" then
+                return self:UseNormalClick(Humanoid, Character, Cooldown)
+            elseif Equipped:FindFirstChild("LeftClickRemote") then
+                return self:UseFruitM1(Character, Equipped, Combo)
+            end
+        else
+            return self:UseNormalClick(Humanoid, Character, Cooldown)
         end
     end
 end
@@ -275,67 +413,19 @@ MainTab:CreateToggle({
             _G.AutoPirateRaid = value
         end
     })
-spawn(function()
-    while wait() do
-        if FarmMode == "Quest" and _G.AutoFarm then
-            pcall(function()
-                local QuestTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
-                if not string.find(QuestTitle, NameMon) then
-                    StartMagnet = false
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-                end
-                if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-                    StartMagnet = false
-                    CheckQuest()
-                    if BypassTP then
-                    if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude > 1500 then
-                    BTP(CFrameQuest)
-                    elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude < 1500 then
-                    ATween(CFrameQuest)
-                    end
-                else
-                    ATween(CFrameQuest)
-                end
-                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude <= 5 then
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest",NameQuest,LevelQuest)
-                    end
-                elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-                    CheckQuest()
-                    if game:GetService("Workspace").Enemies:FindFirstChild(Mon) then
-                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                                if v.Name == Mon then
-                                    if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) then
-                                        repeat task.wait()
-                                            EquipWeapon(_G.SelectWeapon)
-                                            AutoHaki()                                            
-                                            PosMon = v.HumanoidRootPart.CFrame
-                                            ATween(v.HumanoidRootPart.CFrame * Pos)
-                                            v.HumanoidRootPart.CanCollide = false
-                                            v.Humanoid.WalkSpeed = 0
-                                            v.Head.CanCollide = false
-                                            v.HumanoidRootPart.Size = Vector3.new(70,70,70)
-                                            StartMagnet = true
-                                            game:GetService'VirtualUser':CaptureController()
-                                            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                                        until not _G.AutoFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
-                                    else
-                                        StartMagnet = false
-                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-                                    end
-                                end
-                            end
-                        end
-                    else
-                        ATween(CFrameMon)
-                        UnEquipWeapon(_G.SelectWeapon)
-                        StartMagnet = false
-                        if game:GetService("ReplicatedStorage"):FindFirstChild(Mon) then
-                         ATween(game:GetService("ReplicatedStorage"):FindFirstChild(Mon).HumanoidRootPart.CFrame * CFrame.new(15,10,2))
-                        end
-                    end
-                end
-            end)
+MainTab:CreateToggle({
+        Name = "DamgeAura",
+        CurrentValue = true,
+        Callback = function(value)
+                _G.DamgeAura = value
         end
-    end
+})
+local DamgeAuraRun
+DamgeAuraRun = game:GetService("RunService").Stepped:Connect(function()
+	if _G.DamgeAura then
+    	FastAttack.attack()
+	else
+		return nil
+	end
 end)
+

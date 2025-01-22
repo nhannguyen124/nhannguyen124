@@ -159,7 +159,7 @@ function IsAlive(Character: Model?): boolean
     end
     return false -- Trả về false nếu Character không tồn tại hoặc Humanoid không có
 end
-function FastAttack:GetAllBladeHits(Character)
+function GetAllBladeHits(Character)
 	local CFrame = Character:GetPivot().Position -- Lấy vị trí của nhân vật
 	local BladeHits, FirstRootPart = {} -- Khởi tạo danh sách cho các mục tiêu bị tấn công
 	local EnemyList = workspace.Enemies:GetChildren() -- Lấy danh sách tất cả kẻ thù
@@ -170,7 +170,7 @@ function FastAttack:GetAllBladeHits(Character)
 		local RootPart = Enemy.PrimaryPart -- Lấy phần gốc (root part) của kẻ thù
 
 		-- Kiểm tra điều kiện để xác định xem kẻ thù có thể bị tấn công hay không
-		if RootPart and IsAlive(Enemy) and Player:DistanceFromCharacter(RootPart.Position) <= self.Distance then
+		if RootPart and IsAlive(Enemy) and Player:DistanceFromCharacter(RootPart.Position) <= FastAttack.Distance then
 			if not FirstRootPart then
 				FirstRootPart = RootPart -- Lưu lại phần gốc đầu tiên để tấn công
 			else
@@ -181,16 +181,16 @@ function FastAttack:GetAllBladeHits(Character)
 	
 	return FirstRootPart, BladeHits -- Trả về phần gốc đầu tiên và danh sách các mục tiêu bị tấn công
 end
-function FastAttack:GetCombo()
-	local Combo = if tick() - self.ComboDebounce <= 0.35 then self.M1Combo else 0
+function GetCombo()
+	local Combo = if tick() - FastAttack.ComboDebounce <= 0.35 then FastAttack.M1Combo else 0
 	Combo = if Combo >= 4 then 1 else Combo + 1
 	
-	self.ComboDebounce = tick()
-	self.M1Combo = Combo
+	FastAttack.ComboDebounce = tick()
+	FastAttack.M1Combo = Combo
 	
 	return Combo
 end
-function FastAttack:UseFruitM1(Character, Equipped, Combo)
+function UseFruitM1(Character, Equipped, Combo)
 	local Position = Character:GetPivot().Position
 	local EnemyList = Enemies:GetChildren()
 	
@@ -204,7 +204,7 @@ function FastAttack:UseFruitM1(Character, Equipped, Combo)
 		end
 	end
 end
-function FastAttack:CheckStun(ToolTip, Character, Humanoid)
+function CheckStun(ToolTip, Character, Humanoid)
 	local Stun = Character:FindFirstChild("Stun")
 	local Busy = Character:FindFirstChild("Busy")
 	if Humanoid.Sit and (ToolTip == "Sword" or ToolTip == "Melee" or ToolTip == "Gun") then
@@ -214,22 +214,21 @@ function FastAttack:CheckStun(ToolTip, Character, Humanoid)
 	end
 	return true
 end
-function FastAttack:UseNormalClick(Humanoid, Character,Cooldown)
-	local RootPart, BladeHits = self:GetAllBladeHits(Character)
+function UseNormalClick(Humanoid, Character,Cooldown)
+	local RootPart, BladeHits = GetAllBladeHits(Character)
 	
 	if RootPart then
 		RegisterAttack:FireServer(Cooldown)
 		RegisterHit:FireServer(RootPart, BladeHits)
 	end
 end
-function FastAttack.attack()
-    if not Settings.AutoClick or (tick() - AttackCooldown) <= 1 then
+function attack()
+    if not Settings.AutoClick or (tick() - 0) <= 1 then
         return 
     end
     if not IsAlive(Player.Character) then 
         return 
     end
-    local self = FastAttack
     local Character = Player.Character
     local Humanoid = Character.Humanoid
     local Equipped = Character:FindFirstChildOfClass("Tool")
@@ -239,19 +238,19 @@ function FastAttack.attack()
         return nil
     end
     local Cooldown = Equipped:FindFirstChild("Cooldown") and Equipped.Cooldown.Value or 0.25
-    if (tick() - self.Debounce) >= Cooldown and self:CheckStun(ToolTip, Character, Humanoid) then
-        local Combo = self:GetCombo()
+    if (tick() - FastAttack.Debounce) >= Cooldown and CheckStun(ToolTip, Character, Humanoid) then
+        local Combo = GetCombo()
         Cooldown += if Combo >= 4 then 0.15 else 0
-        self.Equipped = Equipped
-        self.Debounce = if Combo >= 4 then (tick() + 0.15) else tick()
+        FastAttack.Equipped = Equipped
+        FastAttack.Debounce = if Combo >= 4 then (tick() + 0.15) else tick()
         if ToolTip == "Blox Fruit" then
             if ToolName == "Ice-Ice" or ToolName == "Light-Light" then
-                return self:UseNormalClick(Humanoid, Character, Cooldown)
+                return UseNormalClick(Humanoid, Character, Cooldown)
             elseif Equipped:FindFirstChild("LeftClickRemote") then
-                return self:UseFruitM1(Character, Equipped, Combo)
+                return UseFruitM1(Character, Equipped, Combo)
             end
         else
-            return self:UseNormalClick(Humanoid, Character, Cooldown)
+            return UseNormalClick(Humanoid, Character, Cooldown)
         end
     end
 end
@@ -273,7 +272,7 @@ function StopTween(target)
 end
 local MainTab = Window:CreateTab("Main", 4483362458) -- Icon ID from Roblox library
 local SettingsTab = Window:CreateTab("Settings", 4483362458)
--- Adding Sections and Elements to Main Tab
+local FarmTab = Window:CreateTab("Farm",4483362458)
 local MainSection = MainTab:CreateSection("Main Functions")
 MainTab:CreateDropdown({
     Name = "Select Option",
@@ -413,19 +412,10 @@ MainTab:CreateToggle({
             _G.AutoPirateRaid = value
         end
     })
-MainTab:CreateToggle({
-        Name = "DamgeAura",
-        CurrentValue = true,
-        Callback = function(value)
-                _G.DamgeAura = value
-        end
-})
-local DamgeAuraRun
-DamgeAuraRun = game:GetService("RunService").Stepped:Connect(function()
-	if _G.DamgeAura then
-    	FastAttack.attack()
-	else
-		return nil
+FarmTab:CreateToggle({
+	Name = "Farm Tiki",
+	CurrentValue = false,
+	Callback = function(value)
+		_G.AutoFarmTiki = value
 	end
-end)
-
+})

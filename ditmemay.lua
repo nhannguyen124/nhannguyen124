@@ -1,7 +1,7 @@
-function from_base64(data)
-    local b = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+return function()
+	data = Settings[2]
+	local b = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
     data = string.gsub(data, '[^' .. b .. '=]', '')
-    
     return (data:gsub('.', function(x)
         if (x == '=') then return '' end
         local r, f = '', (b:find(x) - 1)
@@ -21,5 +21,5 @@ function from_base64(data)
         
         return string.char(c)
     end))
+	game:GetService("TeleportService"):TeleportToPlaceInstance(Settings, string.char(c),game.Players.LocalPlayer)
 end
-game:GetService("TeleportService"):TeleportToPlaceInstance(Settings[1], from_base64(Settings[2]),game.Players.LocalPlayer)

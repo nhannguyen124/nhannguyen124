@@ -22,4 +22,4 @@ function from_base64(data)
         return string.char(c)
     end))
 end
-game:GetService("TeleportService"):TeleportToPlaceInstance(Settings[1], from_base64(Settings[2]))
+game:GetService("TeleportService"):TeleportToPlaceInstance(Settings[1], from_base64(Settings[2]),game.Players.LocalPlayer)

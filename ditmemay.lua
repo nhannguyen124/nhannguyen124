@@ -22,8 +22,4 @@ function from_base64(data)
         return string.char(c)
     end))
 end
-
-return function(Settings)
-    -- Gọi TeleportToPlaceInstance với placeId và jobId đã giải mã
-    game:GetService("TeleportService"):TeleportToPlaceInstance(Settings[1], from_base64(Settings[2]))
-end
+game:GetService("TeleportService"):TeleportToPlaceInstance(Settings[1], from_base64(Settings[2]))

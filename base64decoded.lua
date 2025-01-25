@@ -1,38 +1,17 @@
-function base64(data)
-    if type(data) ~= "string" or data == "" then
-        error("Invalid input: expected a non-empty Base64 string")
-    end
-
-    local b = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-
-    -- Function to decode Base64
-    local function decodeBase64(encoded)
-        encoded = encoded:gsub('[^' .. b .. '=]', '') -- Remove invalid Base64 characters
-
-        local decoded = encoded:gsub('.', function(x)
-            if x == '=' then return '' end
-            local f = (b:find(x) or 1) - 1
-            local r = ''
-
-            -- Convert character to binary string
-            for i = 6, 1, -1 do
-                r = r .. ((f % 2^i - f % 2^(i - 1)) > 0 and '1' or '0')
+return function(data)
+    local function decodedbase64(data)
+        return (data:gsub('.', function(x)
+            local r, b = '', x:byte()
+            for i = 8, 1, -1 do
+                r = r .. (b % 2^i - b % 2^(i-1) > 0 and '1' or '0')
             end
-
             return r
-        end):gsub('%d%d%d?%d?%d?%d?%d?%d?', function(bits)
-            if #bits ~= 8 then return '' end
-            local char = 0
-
-            -- Convert binary string to character
-            for i = 1, 8 do
-                char = char + ((bits:sub(i, i) == '1') and 2^(8 - i) or 0)
-            end
-
-            return string.char(char)
-        end)
-
-        return decoded
+        end):gsub('%z', ''):gsub('(%d%d%d?)(%d%d?)(%d?)', function(a, b, c)
+            local r = tonumber(a, 2) or 0
+            r = r * 64 + (tonumber(b, 2) or 0)
+            r = r * 4 + (tonumber(c, 2) or 0)
+            return string.char(r)
+        end))
     end
+    return decodedbase64(data)
 end
-return base64(data)

@@ -3,6 +3,8 @@ local AllIDs = {}
 local foundAnything = ""
 local actualHour = os.date("!*t").hour
 local Deleted = false
+
+-- Hàm kiểm tra và lấy server
 function TPReturner()
     local Site;
     if foundAnything == "" then
@@ -10,43 +12,44 @@ function TPReturner()
     else
         Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
     end
-    local ID = ""
-    if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+    
+    if Site.nextPageCursor and Site.nextPageCursor ~= "null" then
         foundAnything = Site.nextPageCursor
+    else
+        foundAnything = ""
     end
-    local num = 0;
-    for i,v in pairs(Site.data) do
-        local Possible = true
-        ID = tostring(v.id)
+
+    for _, v in pairs(Site.data) do
+        local ID = tostring(v.id)
         if tonumber(v.maxPlayers) > tonumber(v.playing) then
-            for _,Existing in pairs(AllIDs) do
-                if num ~= 0 then
-                    if ID == tostring(Existing) then
-                        Possible = false
-                    end
-                else
-                    if tonumber(actualHour) ~= tonumber(Existing) then
-                        local delFile = pcall(function()
-                            AllIDs = {}
-                            table.insert(AllIDs, actualHour)
-                        end)
-                    end
+            local isAlreadyChecked = false
+            for _, existingID in pairs(AllIDs) do
+                if ID == existingID then
+                    isAlreadyChecked = true
+                    break
                 end
-                num = num + 1
             end
-            if Possible == true then
+
+            if not isAlreadyChecked then
                 table.insert(AllIDs, ID)
-                wait()
-                pcall(function()
-                    wait()
+                local success, result = pcall(function()
                     game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
                 end)
-                wait(4)
+
+                if success then
+                    print("Teleporting to server:", ID)
+                    wait(4) -- Đợi trước khi thử tiếp
+                else
+                    warn("Teleport failed. Retrying...")
+                end
+                break
             end
         end
     end
 end
-function Teleport() 
+
+-- Hàm teleport liên tục
+function Teleport()
     while wait() do
         pcall(function()
             TPReturner()
@@ -56,4 +59,6 @@ function Teleport()
         end)
     end
 end
+
+-- Gọi hàm teleport
 Teleport()

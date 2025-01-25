@@ -35,7 +35,4 @@ function base64(data)
         return decoded
     end
 end
-return function(data)
-    k = base64(data)
-    return k
-end
+return base64(data)

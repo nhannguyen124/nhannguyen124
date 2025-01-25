@@ -1,4 +1,8 @@
 return function(data)
+    if type(data) ~= "string" or data == "" then
+        error("Invalid input: expected a non-empty Base64 string")
+    end
+
     local b = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
 
     -- Function to decode Base64

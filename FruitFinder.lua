@@ -130,3 +130,4 @@ if #fruitNames > 0 then
 else
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/nhannguyen124/nhannguyen124/refs/heads/main/Hop.lua"))()
 end
+wait()

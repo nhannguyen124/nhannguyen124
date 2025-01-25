@@ -1,4 +1,4 @@
-return function(data)
+function base64(data)
     if type(data) ~= "string" or data == "" then
         error("Invalid input: expected a non-empty Base64 string")
     end
@@ -34,9 +34,7 @@ return function(data)
 
         return decoded
     end
-
-    -- Return a new function that decodes the data
-    return function()
-        return decodeBase64(data)
-    end
+end
+return function(data)
+    base64(data)
 end

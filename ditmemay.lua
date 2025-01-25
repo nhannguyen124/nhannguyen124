@@ -13,7 +13,7 @@ function from_base64(data)
         return string.char(c)
     end))
 end
-return function(Settings)
-  local decodedData = from_base64(Settings[2])
-  game:GetService("TeleportService"):TeleportToPlaceInstance(Settings[1], decodedData, game.Players.LocalPlayer)
+if _G.ServerId then
+  local decodedData = from_base64(_G.ServerId[2])
+  game:GetService("TeleportService"):TeleportToPlaceInstance(_G.ServerId[1], decodedData, game.Players.LocalPlayer)
 end

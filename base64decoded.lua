@@ -36,5 +36,6 @@ function base64(data)
     end
 end
 return function(data)
-    base64(data)
+    k = base64(data)
+    return k
 end

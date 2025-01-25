@@ -1,38 +1,60 @@
-_G.Speed      = 350
-local Players = game:GetService("Players")
-function ATween(Pos)
-    local Pos              = Vector3.new(Pos)
-    local Player           = Players.LocalPlayer
-    local Character        = Player.Character or Player.CharacterAdded:Wait()
-    local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
-    local distance         = (Pos - HumanoidRootPart.Position).Magnitude
-    if distance <= 350 then
-        HumanoidRootPart.CFrame = Pos
-    else
-        -- Nếu khoảng cách lớn hơn 350, sử dụng BodyVelocity để di chuyển
-        local direction       = (Pos - HumanoidRootPart.Position).Unit
-        local bodyVelocity    = Instance.new("BodyVelocity")
-        bodyVelocity.Velocity = direction * _G.Speed
-        bodyVelocity.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-        bodyVelocity.Parent   = HumanoidRootPart
+local Player = game.Players.LocalPlayer
+_G.speed = 350
+local function IsAlive(Character)
+    if Character then
+        local Humanoid = Character:FindFirstChildOfClass("Humanoid")
+        return Humanoid and Humanoid.Health > 0
+    end
+    return false
+end
+local BaseParts = {}
+for _, v in pairs(Player.Character:GetDescendants()) do
+    if v:IsA("BasePart") and v.CanCollide then
+        table.insert(BaseParts, v)
+    end
+end
+local function ATween(TargetPosition)
+    local Character = Player.Character or Player.CharacterAdded:Wait()
+    if not IsAlive(Character) then return end
 
+    local BodyVelocity = Instance.new("BodyVelocity")
+    BodyVelocity.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+    BodyVelocity.P = 1000
+    
+    if _G.tween_bodyvelocity then
+        _G.tween_bodyvelocity:Destroy()
+    end
+    _G.tween_bodyvelocity = BodyVelocity
+    local UpperTorso = Character:FindFirstChild("UpperTorso")
+    local Humanoid = Character:FindFirstChildOfClass("Humanoid")
+
+    if UpperTorso and Humanoid then
+        local distance = (UpperTorso.Position - TargetPosition).magnitude
+        local timeToMove = distance / _G.speed
+        local defaultWalkSpeed = Humanoid.WalkSpeed
+
+        local RunService = game:GetService("RunService")
         local connection
-        connection = game:GetService("RunService").Stepped:Connect(function()
-            local distance = (Pos.Position - HumanoidRootPart.Position).Magnitude
-            if distance <= 350 then
-                HumanoidRootPart.CFrame = Pos
-            elseif _G.StopTween then
-                -- Đến gần đích hoặc yêu cầu dừng, hủy BodyVelocity
-                bodyVelocity:Destroy()
-                connection:Disconnect()
-            else
-                for _, v in pairs(Character:GetChildren()) do
-                    if v:IsA("Part") or v:IsA("MeshPart") then
-                        v.CanCollide = false
-                    end
+        connection = RunService.Stepped:Connect(function()
+            if IsAlive(Character) then
+                BodyVelocity.Parent = UpperTorso
+                BodyVelocity.Velocity = (TargetPosition - UpperTorso.Position).unit * _G.speed
+                for i = 1, #BaseParts do
+                    BaseParts[i].CanCollide = false
+                end
+                if (UpperTorso.Position - TargetPosition).magnitude < 5 then
+                    BodyVelocity.Velocity = Vector3.zero
+                    BodyVelocity:Destroy()
+                    Character:SetPrimaryPartCFrame(CFrame.new(TargetPosition))
+                    connection:Disconnect()
                 end
             end
         end)
+
+        task.wait(timeToMove)
+        for i = 1, #BaseParts do
+            BaseParts[i].CanCollide = true
+        end
     end
 end
-ATween(1000,1000,1000)
+ATween(_G.Position)

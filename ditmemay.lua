@@ -1,4 +1,4 @@
-return function()
+return function(Settings)
 	data = Settings[2]
 	local b = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
 	data = string.gsub(data, '[^' .. b .. '=]', '')

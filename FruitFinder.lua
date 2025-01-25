@@ -85,21 +85,25 @@ local function checkForFruits()
     end
     return fruits
 end
+local function storeFruits(player)
+    for _, v in pairs(player:GetChildren()) do
+        if v:IsA("Tool") and string.find(v.Name, "Fruit") then
+            local success, error = pcall(function()
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit", v:GetAttribute("OriginalName"), v)
+            end)
+            if success then
+                print("Keep Fruit Success: " .. v.Name)
+            else
+                warn("Failed to store fruit: " .. error)
+            end
+        end
+    end
+end
 spawn(function()
-	while wait() do
-		for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-			if v:IsA("Tool") and string.find(v.Name, "Fruit") then
-				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit",v:GetAttribute("OriginalName"),v)
-				Load.Text = "Keep Fruit Success"
-			end
-		end
-		for i, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-			if v:IsA("Tool") and string.find(v.Name, "Fruit") then
-				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit",v:GetAttribute("OriginalName"),v)
-				Load.Text = "Keep Fruit Success"
-			end
-		end
-	end
+    while wait() do
+        storeFruits(game.Players.LocalPlayer.Backpack)
+        storeFruits(game.Players.LocalPlayer.Character)
+    end
 end)
 local fruitNames = checkForFruits()
 local playerCount = tostring(#game.Players:GetPlayers()) .. "/12"

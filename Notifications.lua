@@ -1,13 +1,24 @@
 return function(Text)
 	local TweenService = game:GetService("TweenService") -- Lấy dịch vụ Tween
 	local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui") -- Lấy giao diện của người chơi
+	
+	-- Tạo Notifications Frame nếu chưa tồn tại
+	local notificationsFrame = playerGui:FindFirstChild("Notifications")
+	if not notificationsFrame then
+		notificationsFrame = Instance.new("Frame")
+		notificationsFrame.Name = "Notifications"
+		notificationsFrame.Size = UDim2.new(0, 600, 0, 40) -- Kích thước
+		notificationsFrame.Position = UDim2.new(0.5, -300, 0, 4) -- Vị trí
+		notificationsFrame.BackgroundTransparency = 1 -- Độ trong suốt
+		notificationsFrame.Parent = playerGui -- Đặt vào PlayerGui
+	end
 
 	-- Tạo TextLabel
 	local textLabel = Instance.new("TextLabel")
-	textLabel.Parent = playerGui.Notifications -- Đảm bảo Notifications đã tồn tại
+	textLabel.Parent = notificationsFrame -- Đảm bảo Notifications đã tồn tại
 	textLabel.Name = "DitMeMay"
 	textLabel.Size = UDim2.new(0, 600, 0, 40) -- Kích thước
-	textLabel.Position = UDim2.new(0.5, -300, 0, 4) -- Vị trí
+	textLabel.Position = UDim2.new(0, 0, 0, 0) -- Vị trí
 	textLabel.AnchorPoint = Vector2.new(0, 0) -- Điểm neo
 	textLabel.Visible = true -- Hiển thị
 	textLabel.ZIndex = 25 -- Thứ tự hiển thị

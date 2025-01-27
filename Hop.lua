@@ -3,8 +3,13 @@ local AllIDs = {}
 local foundAnything = ""
 local actualHour = os.date("!*t").hour
 local Deleted = false
-
--- Hàm kiểm tra và lấy server
+local File = pcall(function()
+    AllIDs = game:GetService('HttpService'):JSONDecode(readfile("NotSameServers.json"))
+end)
+if not File then
+    table.insert(AllIDs, actualHour)
+    writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+end
 function TPReturner()
     local Site;
     if foundAnything == "" then
@@ -12,43 +17,44 @@ function TPReturner()
     else
         Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
     end
-    
-    if Site.nextPageCursor and Site.nextPageCursor ~= "null" then
+    local ID = ""
+    if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
         foundAnything = Site.nextPageCursor
-    else
-        foundAnything = ""
     end
-
-    for _, v in pairs(Site.data) do
-        local ID = tostring(v.id)
+    local num = 0;
+    for i,v in pairs(Site.data) do
+        local Possible = true
+        ID = tostring(v.id)
         if tonumber(v.maxPlayers) > tonumber(v.playing) then
-            local isAlreadyChecked = false
-            for _, existingID in pairs(AllIDs) do
-                if ID == existingID then
-                    isAlreadyChecked = true
-                    break
+            for _,Existing in pairs(AllIDs) do
+                if num ~= 0 then
+                    if ID == tostring(Existing) then
+                        Possible = false
+                    end
+                else
+                    if tonumber(actualHour) ~= tonumber(Existing) then
+                        local delFile = pcall(function()
+                            delfile("NotSameServers.json")
+                            AllIDs = {}
+                            table.insert(AllIDs, actualHour)
+                        end)
+                    end
                 end
+                num = num + 1
             end
-
-            if not isAlreadyChecked then
+            if Possible == true then
                 table.insert(AllIDs, ID)
-                local success, result = pcall(function()
+                wait()
+                pcall(function()
+                    writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+                    wait()
                     game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
                 end)
-
-                if success then
-                    print("Teleporting to server:", ID)
-                    wait(4) -- Đợi trước khi thử tiếp
-                else
-                    warn("Teleport failed. Retrying...")
-                end
-                break
+                wait(4)
             end
         end
     end
 end
-
--- Hàm teleport liên tục
 function Teleport()
     while wait() do
         pcall(function()
@@ -59,6 +65,4 @@ function Teleport()
         end)
     end
 end
-
--- Gọi hàm teleport
 Teleport()

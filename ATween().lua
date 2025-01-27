@@ -19,7 +19,7 @@ for _, v in pairs(Player.Character:GetDescendants()) do
 end
 
 -- Hàm tween di chuyển
-local function ATween(TargetPosition)
+function ATween1(TargetPosition)
     local Character = Player.Character or Player.CharacterAdded:Wait()
     if not IsAlive(Character) then return end
 
@@ -72,4 +72,4 @@ local function ATween(TargetPosition)
 end
 
 -- Gọi hàm ATween với vị trí được chỉ định
-ATween(_G.Position)
+ATween1(_G.Position)

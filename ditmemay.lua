@@ -14,6 +14,6 @@ function from_base64(data)
     end))
 end
 if _G.ServerId then
-  local decodedData = from_base64(_G.ServerId[2])
+  local decodedData = not string.find(_G.ServerId[2],'-') and from_base64(_G.ServerId[2]) or _G.ServerId[2]
   game:GetService("TeleportService"):TeleportToPlaceInstance(_G.ServerId[1], decodedData, game.Players.LocalPlayer)
 end

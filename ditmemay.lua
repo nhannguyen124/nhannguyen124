@@ -1,3 +1,7 @@
+ggServerId = nil
+if _G.ServerId[1] and _G.ServerId[2] then
+	ggServerId = _G.ServerId
+end
 function from_base64(data)
     local b = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
     data = string.gsub(data, '[^'..b..'=]', '')
@@ -13,7 +17,7 @@ function from_base64(data)
         return string.char(c)
     end))
 end
-if _G.ServerId then
-  local decodedData = not string.find(_G.ServerId[2],'-') and from_base64(_G.ServerId[2]) or _G.ServerId[2]
-  game:GetService("TeleportService"):TeleportToPlaceInstance(_G.ServerId[1], decodedData, game.Players.LocalPlayer)
+if ggServerId then
+  local decodedData = not string.find(ggServerId[2],'-') and from_base64(ggServerId[2]) or ggServerId[2]
+  game:GetService("TeleportService"):TeleportToPlaceInstance(ggServerId[1], decodedData, game.Players.LocalPlayer)
 end

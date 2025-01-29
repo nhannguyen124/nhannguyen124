@@ -35,7 +35,7 @@ function ATween1(TargetPosition)
     local UpperTorso = Character:FindFirstChild("UpperTorso")
     local Humanoid = Character:FindFirstChildOfClass("Humanoid")
 
-    if UpperTorso and Humanoid then
+    if UpperTorso and Humanoid and _G.Tweening then
         -- Xử lý trạng thái ngồi
         if Humanoid.Sit then
             Humanoid.Sit = false
@@ -49,7 +49,7 @@ function ATween1(TargetPosition)
         local RunService = game:GetService("RunService")
         local connection
         connection = RunService.Stepped:Connect(function()
-            if IsAlive(Character) then
+            if IsAlive(Character) and _G.Tweening then
                 BodyVelocity.Parent = UpperTorso
                 BodyVelocity.Velocity = (TargetPosition - UpperTorso.Position).unit * _G.speed
                 for i = 1, #BaseParts do
@@ -61,9 +61,11 @@ function ATween1(TargetPosition)
                     Character:SetPrimaryPartCFrame(CFrame.new(TargetPosition))
                     connection:Disconnect()
                 end
+            else
+                BodyVelocity:Destroy()
+                connection:Disconnect()
             end
         end)
-
         task.wait(timeToMove)
         for i = 1, #BaseParts do
             BaseParts[i].CanCollide = true

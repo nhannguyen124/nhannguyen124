@@ -25,7 +25,7 @@ function ATween1(TargetPosition)
 
     local BodyVelocity = Instance.new("BodyVelocity")
     BodyVelocity.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-    BodyVelocity.P = 1000
+    BodyVelocity.P = 0
     
     if _G.tween_bodyvelocity then
         _G.tween_bodyvelocity:Destroy()

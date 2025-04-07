@@ -1,71 +1,68 @@
 local Player = game.Players.LocalPlayer
 _G.speed = 350
-_G.Tweening = true
-
--- Kiểm tra nhân vật sống
 local function IsAlive(Character)
-    local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
-    return Humanoid and Humanoid.Health > 0
-end
-
--- Lấy BaseParts mới nhất
-local function GetBaseParts(Character)
-    local Parts = {}
-    for _, v in pairs(Character:GetDescendants()) do
-        if v:IsA("BasePart") and v.CanCollide then
-            table.insert(Parts, v)
-        end
+    if Character then
+        local Humanoid = Character:FindFirstChildOfClass("Humanoid")
+        return Humanoid and Humanoid.Health > 0
     end
-    return Parts
+    return false
 end
-
--- Tween di chuyển
-function ATween1(TargetPosition)
+local BaseParts = {}
+for _, v in pairs(Player.Character:GetDescendants()) do
+    if v:IsA("BasePart") and v.CanCollide then
+        table.insert(BaseParts, v)
+    end
+end
+local function ATween(TargetPosition)
     local Character = Player.Character or Player.CharacterAdded:Wait()
     if not IsAlive(Character) then return end
 
-    if not Character.PrimaryPart then
-        Character.PrimaryPart = Character:FindFirstChild("HumanoidRootPart") or Character:FindFirstChild("UpperTorso")
-        if not Character.PrimaryPart then return end
+    local BodyVelocity = Instance.new("BodyVelocity")
+    BodyVelocity.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+    BodyVelocity.P = 1000
+    
+    if _G.tween_bodyvelocity then
+        _G.tween_bodyvelocity:Destroy()
     end
-
-    local BodyPosition = Instance.new("BodyPosition")
-    BodyPosition.MaxForce = Vector3.new(1e6, 1e6, 1e6)
-    BodyPosition.D = 100
-    BodyPosition.P = _G.speed * 100 -- Có thể scale theo speed
-    BodyPosition.Position = TargetPosition
-    BodyPosition.Parent = Character.PrimaryPart
-
+    _G.tween_bodyvelocity = BodyVelocity
     local UpperTorso = Character:FindFirstChild("UpperTorso")
     local Humanoid = Character:FindFirstChildOfClass("Humanoid")
 
     if UpperTorso and Humanoid then
-        if Humanoid.Sit then
-            Humanoid.Sit = false
-            task.wait(0.1)
-        end
+        BodyVelocity.Parent = UpperTorso
+        local distance = (UpperTorso.Position - TargetPosition).magnitude
+        local timeToMove = distance / _G.speed
+        local defaultWalkSpeed = Humanoid.WalkSpeed
 
-        local BaseParts = GetBaseParts(Character)
-        for _, part in pairs(BaseParts) do
-            part.CanCollide = false
-        end
+        local RunService = game:GetService("RunService")
+        local connection
+        connection = RunService.Stepped:Connect(function()
+            if IsAlive(Character) then
+                BodyVelocity.Velocity = (TargetPosition - UpperTorso.Position).unit * _G.speed
+                for i = 1, #BaseParts do
+                    BaseParts[i].CanCollide = false
+                end
+                if (UpperTorso.Position - TargetPosition).magnitude < 5 then
+                    -- Dừng di chuyển
+                    Humanoid.WalkSpeed = 0
+                    BodyVelocity.Velocity = Vector3.zero
+                    BodyVelocity:Destroy()
+                    
+                    -- Đặt lại vị trí
+                    Character:SetPrimaryPartCFrame(CFrame.new(TargetPosition))
+                    
+                    -- Khôi phục WalkSpeed sau khi dừng
+                    task.wait(2)
+                    Humanoid.WalkSpeed = defaultWalkSpeed
+                    connection:Disconnect()
+                end
+            end
+        end)
 
-        -- Di chuyển đến đích
-        while IsAlive(Character) and _G.Tweening and BodyPosition do
-            local dist = (UpperTorso.Position - TargetPosition).Magnitude
-            if dist < 5 then break end
-            task.wait(0.1)
-        end
-
-        -- Cleanup
-        if BodyPosition then BodyPosition:Destroy() end
-        for _, part in pairs(BaseParts) do
-            part.CanCollide = true
+        task.wait(timeToMove)
+        for i = 1, #BaseParts do
+            BaseParts[i].CanCollide = true
         end
     end
 end
-
--- Gọi hàm chính
-if _G.Position then
-    ATween1(_G.Position)
-end
+ATween(_G.Position)

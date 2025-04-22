@@ -342,7 +342,7 @@ function Tween(TargetPosition)
 				if BodyVelocity.Parent ~= RootPart then
 					BodyVelocity.Parent = RootPart
 				end
-				BodyVelocity.Velocity = (TargetPosition - RootPart.Position).unit * 350
+				BodyVelocity.Velocity = (TargetPosition - RootPart.Position).unit * _G.Speed
 			else
 				if BodyVelocity.Parent then
 					BodyVelocity.Parent = nil

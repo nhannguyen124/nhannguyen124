@@ -1,4 +1,3 @@
-print('asdadsad')
 local Settings, Connections = {},{}
 local AttackCooldown = 0
 local _ENV = (getgenv or getrenv or getfenv)()

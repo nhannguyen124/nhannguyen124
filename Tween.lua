@@ -1,3 +1,4 @@
+_G.TweenSpeed = _G.TweenSpeed or 300
 local Settings, Connections = {},{}
 local AttackCooldown = 0
 local _ENV = (getgenv or getrenv or getfenv)()
@@ -342,7 +343,7 @@ function Tween()
 				if BodyVelocity.Parent ~= RootPart then
 					BodyVelocity.Parent = RootPart
 				end
-				BodyVelocity.Velocity = _G.TargetPosition and (_G.TargetPosition - RootPart.Position).unit * _G.TweenSpeed or Vector3.zero
+				BodyVelocity.Velocity = (_G.TargetPosition - RootPart.Position).unit * _G.TweenSpeed
 			else
 				if BodyVelocity.Parent then
 					BodyVelocity.Parent = nil
@@ -360,8 +361,18 @@ function Tween()
 		NoClipOnStepped(Character)
 	end
 end
+function StartTweenTo(Position: Vector3)
+	_G.TargetPosition = Position
+	_ENV.OnFarm = true
+end
+function StopTween()
+	_ENV.tween_bodyvelocity.Parent = nil
+	_ENV.OnFarm = false
+end
 spawn(function()
 	while wait() do
-		Tween()
+		if _G.TargetPosition then
+			Tween()
+		end
 	end
 end)

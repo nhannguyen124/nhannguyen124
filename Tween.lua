@@ -354,10 +354,12 @@ function Tween()
 			end
 		end
 	end
-	table.insert(Connections, Stepped:Connect(function()
-		local Character = Player.Character
-		UpdateVelocityOnStepped(Character)
-		NoClipOnStepped(Character)
-	end))
+	local Character = Player.Character
+	UpdateVelocityOnStepped(Character)
+	NoClipOnStepped(Character)
 end
-Tween()
+spawn(function()
+	while wait() do
+		Tween()
+	end
+end)

@@ -252,7 +252,7 @@ local Signal = {} do
 	})
 end
 
-function Tween(TargetPosition)
+function Tween()
 	local BodyVelocity = Instance.new("BodyVelocity")
 	BodyVelocity.Velocity = Vector3.zero
 	BodyVelocity.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
@@ -342,7 +342,7 @@ function Tween(TargetPosition)
 				if BodyVelocity.Parent ~= RootPart then
 					BodyVelocity.Parent = RootPart
 				end
-				BodyVelocity.Velocity = (TargetPosition - RootPart.Position).unit * _G.TweenSpeed
+				BodyVelocity.Velocity = _G.TargetPosition and (_G.TargetPosition - RootPart.Position).unit * _G.TweenSpeed or Vector3.zero
 			else
 				if BodyVelocity.Parent then
 					BodyVelocity.Parent = nil
@@ -354,14 +354,10 @@ function Tween(TargetPosition)
 			end
 		end
 	end
-	local Character = Player.Character
-	UpdateVelocityOnStepped(Character,TargetPosition)
-	NoClipOnStepped(Character)
+	table.insert(Connections, Stepped:Connect(function()
+		local Character = Player.Character
+		UpdateVelocityOnStepped(Character)
+		NoClipOnStepped(Character)
+	end))
 end
-coroutine.wrap(function()
-	while true do
-		Tween(_G.TargetPosition)
-		wait()
-	end
-end)()
-
+Tween()

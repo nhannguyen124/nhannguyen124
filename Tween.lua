@@ -354,9 +354,11 @@ function Tween()
 			end
 		end
 	end
-	local Character = Player.Character
-	UpdateVelocityOnStepped(Character)
-	NoClipOnStepped(Character)
+	if _G.TargetPosition then
+		local Character = Player.Character
+		UpdateVelocityOnStepped(Character)
+		NoClipOnStepped(Character)
+	end
 end
 spawn(function()
 	while wait() do

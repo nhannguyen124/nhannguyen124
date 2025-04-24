@@ -722,7 +722,7 @@ elseif World3 then
         NameMon = "Serpent Hunter"
         CFrameQuest = CFrame.new(-16665.2, 104.596, 1579.69)
         CFrameMon = CFrame.new(-16602.8, 156.831, 1528.83)
-    elseif MyLevel = 2575 or MyLevel <= 2550 then
+    elseif MyLevel == 2575 or MyLevel <= 2600 then
         print(MyLevel)
         Mon = "Skull Slayer"
         LevelQuest = 2

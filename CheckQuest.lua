@@ -729,7 +729,7 @@ elseif World3 then
         _G.NameMon = "Serpent Hunter"
         _G.CFrameQuest = CFrame.new(-16665.2, 104.596, 1579.69)
         _G.CFrameMon = CFrame.new(-16602.8, 156.831, 1528.83)
-    elseif _G.MyLevel == 2575 or _G.MyLevel <= 2600 then
+    elseif _G.MyLevel == 2575 or _G.MyLevel <= 2650 then
 
         _G.Mon = "Skull Slayer"
         _G.LevelQuest = 2

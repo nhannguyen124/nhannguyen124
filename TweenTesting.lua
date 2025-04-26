@@ -69,7 +69,7 @@ function ATween1(TargetPosition)
 		local BodyVelocity = Instance.new("BodyVelocity")
 		BodyVelocity.MaxForce = Vector3.new(1e5, 1e5, 1e5)
 		BodyVelocity.P = 1000
-		BodyVelocity.Velocity = Direction.Unit * _G.speed
+		BodyVelocity.Velocity = Direction.Unit * _G.TweenSpeed
 		_G.tween_bodyvelocity = BodyVelocity
 		BodyVelocity.Parent = HRP
 		local BaseParts = GetBaseParts()

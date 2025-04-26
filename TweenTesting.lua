@@ -1,5 +1,5 @@
 local Player = game.Players.LocalPlayer
-_G.speed = 350
+_G.TweenSpeed = _G.TweenSpeed or 350
 _G.Tweening = true -- bật trạng thái Tween
 
 -- Kiểm tra nhân vật còn sống
@@ -22,32 +22,21 @@ function ATween(Pos: Vector3)
     local player = game.Players.LocalPlayer
     local char = player.Character
     if not char or not char:FindFirstChild("HumanoidRootPart") or not char:FindFirstChild("Humanoid") then return end
-
     local root = char.HumanoidRootPart
     local humanoid = char.Humanoid
-
     local targetCFrame = CFrame.new(Pos)
     local distance = (targetCFrame.Position - root.Position).Magnitude
-
     if humanoid.Sit then
         humanoid.Sit = false
     end
-
     local tweenService = game:GetService("TweenService")
-    local tweenInfo = TweenInfo.new(distance / (_G.TweenSpeed or 300), Enum.EasingStyle.Linear)
+    local tweenInfo = TweenInfo.new(distance / 5000, Enum.EasingStyle.Linear)
     local tween
-
     local success = pcall(function()
         tween = tweenService:Create(root, tweenInfo, {CFrame = targetCFrame})
     end)
     if success and tween then
         tween:Play()
-
-        -- Hủy tween nếu khoảng cách quá gần
-        if distance <= 250 then
-            tween:Cancel()
-            root.CFrame = targetCFrame
-        end
         if _G.StopTween then
             tween:Cancel()
             _G.Clip = false
@@ -90,10 +79,12 @@ function ATween1(TargetPosition)
 				end)
 			end
 			BodyVelocity.Parent = HRP
-			BodyVelocity.Velocity = Direction.Unit * _G.speed
+			BodyVelocity.Velocity = Direction.Unit * _G.TweenSpeed
 			wait()
 			if BodyVelocity then BodyVelocity:Destroy() end
 		end
 	end
 end
-ATween1(_G.TargetPosition)
+while wait() do
+	pcall(function() ATween1(_G.TargetPosition) end)
+end

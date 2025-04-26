@@ -1,4 +1,4 @@
-return function(...)
+return function(Pos)
 	local Player = game.Players.LocalPlayer
 	_G.speed = _G.speed or 350
 	_G.TweenSpeed = _G.TweenSpeed or _G.speed or 300
@@ -97,5 +97,5 @@ return function(...)
 		end
 	end
 
-	ATween1(...)
+	ATween1(Pos)
 end

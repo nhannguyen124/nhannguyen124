@@ -86,6 +86,8 @@ function ATween1(TargetPosition)
 		end
 	end
 end
-while wait() do
-	pcall(function() ATween1(_G.TargetPosition) end)
+spawn(function()
+	while wait() do
+		pcall(function() ATween1(_G.TargetPosition) end)
+	end
 end

@@ -30,21 +30,22 @@ function ATween(Pos: Vector3)
         humanoid.Sit = false
     end
     local tweenService = game:GetService("TweenService")
-    local tweenInfo = TweenInfo.new(distance / 5000, Enum.EasingStyle.Linear)
+    local tweenInfo = TweenInfo.new(distance / 500, Enum.EasingStyle.Linear)
     local tween
     local success = pcall(function()
         tween = tweenService:Create(root, tweenInfo, {CFrame = targetCFrame})
     end)
-    if success and tween then
+    if success and tween and _G.OnFarm then
         tween:Play()
         if _G.StopTween then
             tween:Cancel()
             _G.Clip = false
         end
+		tween.Completed:Wait()
     end
 end
 function ATween1(TargetPosition)
-	if TargetPosition then
+	if TargetPosition and _G.OnFarm and _G.Tweening then
 		local Character = Player.Character or Player.CharacterAdded:Wait()
 		if not IsAlive(Character) then return end
 
@@ -53,7 +54,7 @@ function ATween1(TargetPosition)
 		if not HRP or not Humanoid then return end
 		local Direction = (TargetPosition - HRP.Position)
 		local Distance = Direction.Magnitude
-		local Duration = Distance / _G.speed
+		local Duration = Distance / _G.TweenSpeed
 		if Distance <= 210 then
 			ATween(TargetPosition)
 		else
@@ -80,7 +81,7 @@ function ATween1(TargetPosition)
 			end
 			BodyVelocity.Parent = HRP
 			BodyVelocity.Velocity = Direction.Unit * _G.TweenSpeed
-			wait()
+			wait(0.1)
 			if BodyVelocity then BodyVelocity:Destroy() end
 		end
 	end

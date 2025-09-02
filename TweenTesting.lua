@@ -90,4 +90,4 @@ spawn(function()
 	while wait() do
 		pcall(function() ATween1(_G.TargetPosition) end)
 	end
-end
+end)

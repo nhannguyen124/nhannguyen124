@@ -1,7 +1,7 @@
 local Player = game.Players.LocalPlayer
 local RunService = game:GetService("RunService")
 loadstring(game:HttpGet("https://raw.githubusercontent.com/nhannguyen124/nhannguyen124/refs/heads/main/TweenTesting.lua"))()
-_G.OnFarm = true
+_G.OnFarm = false
 function GetNearestChest(SelectedIsland)
     local char = Player.Character or Player.CharacterAdded:Wait()
     local position = char:GetPivot().Position

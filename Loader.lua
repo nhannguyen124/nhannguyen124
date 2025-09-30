@@ -279,7 +279,7 @@ MainTab:CreateDropdown({
     Options = {"NoQuest", "Quest"},
     CurrentOption = "NoQuest",
     Callback = function(Option)
-        CakeFMode = Option
+        _G.OnFarm = Option
     end,
 })
 MainTab:CreateButton({
@@ -405,17 +405,3 @@ MainTab:CreateToggle({
             end
         end,
     })
-MainTab:CreateToggle({
-        Name = "Auto Pirate Raid",
-        CurrentValue = false,
-        Callback = function(value)
-            _G.AutoPirateRaid = value
-        end
-    })
-FarmTab:CreateToggle({
-	Name = "Farm Tiki",
-	CurrentValue = false,
-	Callback = function(value)
-		_G.AutoFarmTiki = value
-	end
-})

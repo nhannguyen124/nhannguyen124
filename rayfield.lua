@@ -2438,7 +2438,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 		-- Section
 		function Tab:CreateSection(SectionName)
-
+			if typeof(SectionName) == "table" then
+		        SectionName = SectionName[1]
+		    end
 			local SectionValue = {}
 
 			if SDone then

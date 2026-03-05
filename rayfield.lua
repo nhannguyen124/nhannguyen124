@@ -3328,9 +3328,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 		-- Slider
 		function Tab:CreateSlider(SliderSettings)
-			if not SliderSettings.Range then
-				SliderSettings.Range = {SliderSettings.Min,SliderSettings.Max}
-			end
+			SliderSettings.Range = SliderSettings.Range or {SliderSettings.Min, SliderSettings.Max}
 			local SLDragging = false
 			local Slider = Elements.Template.Slider:Clone()
 			Slider.Name = SliderSettings.Name

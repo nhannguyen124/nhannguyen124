@@ -164,7 +164,7 @@ local function loadSettings()
 			-- for debug in studio
 			if useStudio then
 				file = [[
-		{"General":{"rayfieldOpen":{"Value":"K","Type":"bind","Name":"Rayfield Keybind","Element":{"HoldToInteract":false,"Ext":true,"Name":"Rayfield Keybind","Set":null,"CallOnChange":true,"Callback":null,"CurrentKeybind":"K"}}},"System":{"usageAnalytics":{"Value":false,"Type":"toggle","Name":"Anonymised Analytics","Element":{"Ext":true,"Name":"Anonymised Analytics","Set":null,"CurrentValue":false,"Callback":null}}}}
+		{"General":{"rayfieldOpen":{"Value":"K","Type":"bind","Name":"Rayfield Keybind","Element":{"HoldToInteract":false,"Ext":true,"Name":"Rayfield Keybind","Set":null,"CallOnChange":true,"Callback":null,"CurrentKeybind":"K"}}},"System":{"usageAnalytics":{"Value":false,"Type":"toggle","Name":"Anonymised Analytics","Element":{"Ext":true,"Name":"Anonymised Analytics","Set":null,"Default":false,"Callback":null}}}}
 	]]
 			end
 
@@ -978,7 +978,7 @@ local function LoadConfiguration(Configuration)
 					changed = true
 					Flag:Set(UnpackColor(FlagValue))
 				else
-					if (Flag.CurrentValue or Flag.CurrentKeybind or Flag.CurrentOption or Flag.Color) ~= FlagValue then 
+					if (Flag.Default or Flag.CurrentKeybind or Flag.CurrentOption or Flag.Color) ~= FlagValue then 
 						changed = true
 						Flag:Set(FlagValue) 	
 					end
@@ -1006,14 +1006,14 @@ local function SaveConfiguration()
 		if v.Type == "ColorPicker" then
 			Data[i] = PackColor(v.Color)
 		else
-			if typeof(v.CurrentValue) == 'boolean' then
-				if v.CurrentValue == false then
+			if typeof(v.Default) == 'boolean' then
+				if v.Default == false then
 					Data[i] = false
 				else
-					Data[i] = v.CurrentValue or v.CurrentKeybind or v.CurrentOption or v.Color
+					Data[i] = v.Default or v.CurrentKeybind or v.CurrentOption or v.Color
 				end
 			else
-				Data[i] = v.CurrentValue or v.CurrentKeybind or v.CurrentOption or v.Color
+				Data[i] = v.Default or v.CurrentKeybind or v.CurrentOption or v.Color
 			end
 		end
 	end
@@ -1552,7 +1552,7 @@ local function createSettings(window)
 			if setting.Type == 'input' then
 				setting.Element = newTab:CreateInput({
 					Name = setting.Name,
-					CurrentValue = setting.Value,
+					Default = setting.Value,
 					PlaceholderText = setting.Placeholder,
 					Ext = true,
 					RemoveTextAfterFocusLost = setting.ClearOnFocus,
@@ -1563,7 +1563,7 @@ local function createSettings(window)
 			elseif setting.Type == 'toggle' then
 				setting.Element = newTab:CreateToggle({
 					Name = setting.Name,
-					CurrentValue = setting.Value,
+					Default = setting.Value,
 					Ext = true,
 					Callback = function(Value)
 						updateSetting(categoryName, settingName, Value)
@@ -2627,7 +2627,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			Input.UIStroke.Transparency = 1
 			Input.Title.TextTransparency = 1
 
-			Input.InputFrame.InputBox.Text = InputSettings.CurrentValue or ''
+			Input.InputFrame.InputBox.Text = InputSettings.Default or ''
 
 			Input.InputFrame.BackgroundColor3 = SelectedTheme.InputBackground
 			Input.InputFrame.UIStroke.Color = SelectedTheme.InputStroke
@@ -2642,7 +2642,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			Input.InputFrame.InputBox.FocusLost:Connect(function()
 				local Success, Response = pcall(function()
 					InputSettings.Callback(Input.InputFrame.InputBox.Text)
-					InputSettings.CurrentValue = Input.InputFrame.InputBox.Text
+					InputSettings.Default = Input.InputFrame.InputBox.Text
 				end)
 
 				if not Success then
@@ -2680,7 +2680,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			function InputSettings:Set(text)
 				Input.InputFrame.InputBox.Text = text
-				InputSettings.CurrentValue = text
+				InputSettings.Default = text
 
 				local Success, Response = pcall(function()
 					InputSettings.Callback(text)
@@ -3178,7 +3178,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			TweenService:Create(Toggle.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
 			TweenService:Create(Toggle.Title, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()	
 
-			if ToggleSettings.CurrentValue == true then
+			if ToggleSettings.Default == true then
 				Toggle.Switch.Indicator.Position = UDim2.new(1, -20, 0.5, 0)
 				Toggle.Switch.Indicator.UIStroke.Color = SelectedTheme.ToggleEnabledStroke
 				Toggle.Switch.Indicator.BackgroundColor3 = SelectedTheme.ToggleEnabled
@@ -3199,8 +3199,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 			end)
 
 			Toggle.Interact.MouseButton1Click:Connect(function()
-				if ToggleSettings.CurrentValue == true then
-					ToggleSettings.CurrentValue = false
+				if ToggleSettings.Default == true then
+					ToggleSettings.Default = false
 					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackgroundHover}):Play()
 					TweenService:Create(Toggle.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 					TweenService:Create(Toggle.Switch.Indicator, TweenInfo.new(0.45, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Position = UDim2.new(1, -40, 0.5, 0)}):Play()
@@ -3210,7 +3210,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
 					TweenService:Create(Toggle.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()	
 				else
-					ToggleSettings.CurrentValue = true
+					ToggleSettings.Default = true
 					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackgroundHover}):Play()
 					TweenService:Create(Toggle.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 					TweenService:Create(Toggle.Switch.Indicator, TweenInfo.new(0.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Position = UDim2.new(1, -20, 0.5, 0)}):Play()
@@ -3224,7 +3224,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				local Success, Response = pcall(function()
 					if debugX then warn('Running toggle \''..ToggleSettings.Name..'\' (Interact)') end
 
-					ToggleSettings.Callback(ToggleSettings.CurrentValue)
+					ToggleSettings.Callback(ToggleSettings.Default)
 				end)
 
 				if not Success then
@@ -3246,7 +3246,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			function ToggleSettings:Set(NewToggleValue)
 				if NewToggleValue == true then
-					ToggleSettings.CurrentValue = true
+					ToggleSettings.Default = true
 					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackgroundHover}):Play()
 					TweenService:Create(Toggle.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 					TweenService:Create(Toggle.Switch.Indicator, TweenInfo.new(0.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Position = UDim2.new(1, -20, 0.5, 0)}):Play()
@@ -3258,7 +3258,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
 					TweenService:Create(Toggle.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()	
 				else
-					ToggleSettings.CurrentValue = false
+					ToggleSettings.Default = false
 					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackgroundHover}):Play()
 					TweenService:Create(Toggle.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 					TweenService:Create(Toggle.Switch.Indicator, TweenInfo.new(0.45, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Position = UDim2.new(1, -40, 0.5, 0)}):Play()
@@ -3274,7 +3274,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				local Success, Response = pcall(function()
 					if debugX then warn('Running toggle \''..ToggleSettings.Name..'\' (:Set)') end
 
-					ToggleSettings.Callback(ToggleSettings.CurrentValue)
+					ToggleSettings.Callback(ToggleSettings.Default)
 				end)
 
 				if not Success then
@@ -3312,7 +3312,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 				task.wait()
 
-				if not ToggleSettings.CurrentValue then
+				if not ToggleSettings.Default then
 					Toggle.Switch.Indicator.UIStroke.Color = SelectedTheme.ToggleDisabledStroke
 					Toggle.Switch.Indicator.BackgroundColor3 = SelectedTheme.ToggleDisabled
 					Toggle.Switch.UIStroke.Color = SelectedTheme.ToggleDisabledOuterStroke
@@ -3352,12 +3352,12 @@ function RayfieldLibrary:CreateWindow(Settings)
 			TweenService:Create(Slider.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
 			TweenService:Create(Slider.Title, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()	
 
-			Slider.Main.Progress.Size =	UDim2.new(0, Slider.Main.AbsoluteSize.X * ((SliderSettings.CurrentValue + SliderSettings.Range[1]) / (SliderSettings.Range[2] - SliderSettings.Range[1])) > 5 and Slider.Main.AbsoluteSize.X * (SliderSettings.CurrentValue / (SliderSettings.Range[2] - SliderSettings.Range[1])) or 5, 1, 0)
+			Slider.Main.Progress.Size =	UDim2.new(0, Slider.Main.AbsoluteSize.X * ((SliderSettings.Default + SliderSettings.Range[1]) / (SliderSettings.Range[2] - SliderSettings.Range[1])) > 5 and Slider.Main.AbsoluteSize.X * (SliderSettings.Default / (SliderSettings.Range[2] - SliderSettings.Range[1])) or 5, 1, 0)
 
 			if not SliderSettings.Suffix then
-				Slider.Main.Information.Text = tostring(SliderSettings.CurrentValue)
+				Slider.Main.Information.Text = tostring(SliderSettings.Default)
 			else
-				Slider.Main.Information.Text = tostring(SliderSettings.CurrentValue) .. " " .. SliderSettings.Suffix
+				Slider.Main.Information.Text = tostring(SliderSettings.Default) .. " " .. SliderSettings.Suffix
 			end
 
 			Slider.MouseEnter:Connect(function()
@@ -3422,7 +3422,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 							Slider.Main.Information.Text = tostring(NewValue) .. " " .. SliderSettings.Suffix
 						end
 
-						if SliderSettings.CurrentValue ~= NewValue then
+						if SliderSettings.Default ~= NewValue then
 							local Success, Response = pcall(function()
 								SliderSettings.Callback(NewValue)
 							end)
@@ -3438,7 +3438,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 								TweenService:Create(Slider.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
 							end
 
-							SliderSettings.CurrentValue = NewValue
+							SliderSettings.Default = NewValue
 							if not SliderSettings.Ext then
 								SaveConfiguration()
 							end
@@ -3472,7 +3472,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					TweenService:Create(Slider.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
 				end
 
-				SliderSettings.CurrentValue = NewVal
+				SliderSettings.Default = NewVal
 				if not SliderSettings.Ext then
 					SaveConfiguration()
 				end
@@ -3836,7 +3836,7 @@ if useStudio then
 	--	Range = {0, 100},
 	--	Increment = 10,
 	--	Suffix = "Bananas",
-	--	CurrentValue = 40,
+	--	Default = 40,
 	--	Flag = "Slidefefsr1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
 	--	Callback = function(Value)
 	--		-- The function that takes place when the slider changes
@@ -3846,7 +3846,7 @@ if useStudio then
 
 	--local Input = Tab2:CreateInput({
 	--	Name = "Input Example",
-	--	CurrentValue = '',
+	--	Default = '',
 	--	PlaceholderText = "Input Placeholder",
 	--	Flag = 'dawdawd',
 	--	RemoveTextAfterFocusLost = false,
@@ -3871,7 +3871,7 @@ if useStudio then
 
 	--local Toggle = Tab:CreateToggle({
 	--	Name = "Toggle Example",
-	--	CurrentValue = false,
+	--	Default = false,
 	--	Flag = "Toggle1adwawd", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
 	--	Callback = function(Value)
 	--		-- The function that takes place when the toggle is pressed
@@ -3894,7 +3894,7 @@ if useStudio then
 	--	Range = {0, 100},
 	--	Increment = 10,
 	--	Suffix = "Bananas",
-	--	CurrentValue = 40,
+	--	Default = 40,
 	--	Flag = "Slider1dawd", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
 	--	Callback = function(Value)
 	--		-- The function that takes place when the slider changes
@@ -3904,7 +3904,7 @@ if useStudio then
 
 	--local Input = Tab:CreateInput({
 	--	Name = "Input Example",
-	--	CurrentValue = "Helo",
+	--	Default = "Helo",
 	--	PlaceholderText = "Adaptive Input",
 	--	RemoveTextAfterFocusLost = false,
 	--	Flag = 'Input1',

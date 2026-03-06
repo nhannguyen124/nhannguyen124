@@ -993,11 +993,11 @@ local function LoadConfiguration(Configuration)
 				if Flag.Type == "ColorPicker" then
 					local color = UnpackColor(FlagValue)
 					Flag:Set(color)
-					_G[FlagName] = color
+					_G[tostring(FlagName)] = color
 
 				else
 					Flag:Set(FlagValue)
-					_G[FlagName] = FlagValue
+					_G[tostring(FlagName)] = FlagValue
 
 				end
 

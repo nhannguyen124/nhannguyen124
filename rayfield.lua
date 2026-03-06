@@ -971,36 +971,37 @@ local function ToLua(v)
 	end
 end
 local function LoadConfiguration(Configuration)
-	local success, Data = pcall(function() return HttpService:JSONDecode(Configuration) end)
+	local success, Data = pcall(function()
+		return HttpService:JSONDecode(Configuration)
+	end)
+
 	local changed
 
 	if not success then 
-		warn('Rayfield had an issue decoding the configuration file, please try delete the file and reopen Rayfield.') 
-		return 
+		warn("Rayfield config decode lỗi")
+		return
 	end
 
 	for FlagName, Flag in pairs(RayfieldLibrary.Flags) do
 		local FlagValue = Data[FlagName]
+
 		print("LOAD:",FlagName,FlagValue)
-		if (typeof(FlagValue) == 'boolean' and FlagValue == false) or FlagValue then
+
+		if FlagValue ~= nil then
 			task.spawn(function()
 
 				if Flag.Type == "ColorPicker" then
-					changed = true
 					local color = UnpackColor(FlagValue)
 					Flag:Set(color)
-
 					_G[FlagName] = color
 
 				else
-					if (Flag.Default or Flag.CurrentKeybind or Flag.CurrentOption or Flag.Color) ~= FlagValue then 
-						changed = true
-						Flag:Set(FlagValue)
-				
-						loadstring("_G."..FlagName.." = "..ToLua(FlagValue))()
-					end
+					Flag:Set(FlagValue)
+					_G[FlagName] = FlagValue
+
 				end
 
+				changed = true
 			end)
 		end
 	end

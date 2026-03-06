@@ -980,12 +980,12 @@ local function LoadConfiguration(Configuration)
 				if Flag.Type == "ColorPicker" then
 					changed = true
 					Flag:Set(UnpackColor(FlagValue))
-					_G[FlagName] = UnpackColor(FlagValue) -- lưu vào _G
+					loadstring("_G."..FlagName.." = " ..UnpackColor(FlagValue) )()-- lưu vào _G
 				else
 					if (Flag.Default or Flag.CurrentKeybind or Flag.CurrentOption or Flag.Color) ~= FlagValue then 
 						changed = true
 						Flag:Set(FlagValue) 	
-						_G[FlagName] = FlagValue -- lưu vào _G
+						loadstring("_G."..FlagName.." = "..FlagValue)() -- lưu vào _G
 					end
 				end
 			end)

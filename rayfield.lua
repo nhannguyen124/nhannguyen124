@@ -981,7 +981,7 @@ local function LoadConfiguration(Configuration)
 
 	for FlagName, Flag in pairs(RayfieldLibrary.Flags) do
 		local FlagValue = Data[FlagName]
-
+		print("LOAD:",FlagName,FlagValue)
 		if (typeof(FlagValue) == 'boolean' and FlagValue == false) or FlagValue then
 			task.spawn(function()
 
@@ -996,7 +996,7 @@ local function LoadConfiguration(Configuration)
 					if (Flag.Default or Flag.CurrentKeybind or Flag.CurrentOption or Flag.Color) ~= FlagValue then 
 						changed = true
 						Flag:Set(FlagValue)
-
+				
 						loadstring("_G."..FlagName.." = "..ToLua(FlagValue))()
 					end
 				end

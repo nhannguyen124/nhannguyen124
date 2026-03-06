@@ -961,7 +961,15 @@ end
 local function UnpackColor(Color)
 	return Color3.fromRGB(Color.R, Color.G, Color.B)
 end
-
+local function ToLua(v)
+	if typeof(v) == "string" then
+		return '"'..v..'"'
+	elseif typeof(v) == "boolean" or typeof(v) == "number" then
+		return tostring(v)
+	else
+		return "nil"
+	end
+end
 local function LoadConfiguration(Configuration)
 	local success, Data = pcall(function() return HttpService:JSONDecode(Configuration) end)
 	local changed
@@ -971,33 +979,34 @@ local function LoadConfiguration(Configuration)
 		return 
 	end
 
-	-- Iterate through current UI elements' flags
 	for FlagName, Flag in pairs(RayfieldLibrary.Flags) do
 		local FlagValue = Data[FlagName]
 
 		if (typeof(FlagValue) == 'boolean' and FlagValue == false) or FlagValue then
 			task.spawn(function()
+
 				if Flag.Type == "ColorPicker" then
 					changed = true
-					Flag:Set(UnpackColor(FlagValue))
-					loadstring("_G."..FlagName.." = " ..UnpackColor(FlagValue) )()-- lưu vào _G
+					local color = UnpackColor(FlagValue)
+					Flag:Set(color)
+
+					_G[FlagName] = color
+
 				else
 					if (Flag.Default or Flag.CurrentKeybind or Flag.CurrentOption or Flag.Color) ~= FlagValue then 
 						changed = true
-						Flag:Set(FlagValue) 	
-						loadstring("_G."..FlagName.." = "..FlagValue)() -- lưu vào _G
+						Flag:Set(FlagValue)
+
+						loadstring("_G."..FlagName.." = "..ToLua(FlagValue))()
 					end
 				end
+
 			end)
-		else
-			warn("Rayfield | Unable to find '"..FlagName.. "' in the save file.")
-			print("The error above may not be an issue if new elements have been added or not been set values.")
 		end
 	end
 
 	return changed
 end
-
 local function SaveConfiguration()
 	if not CEnabled or not globalLoaded then return end
 

@@ -966,7 +966,10 @@ local function LoadConfiguration(Configuration)
 	local success, Data = pcall(function() return HttpService:JSONDecode(Configuration) end)
 	local changed
 
-	if not success then warn('Rayfield had an issue decoding the configuration file, please try delete the file and reopen Rayfield.') return end
+	if not success then 
+		warn('Rayfield had an issue decoding the configuration file, please try delete the file and reopen Rayfield.') 
+		return 
+	end
 
 	-- Iterate through current UI elements' flags
 	for FlagName, Flag in pairs(RayfieldLibrary.Flags) do
@@ -977,17 +980,18 @@ local function LoadConfiguration(Configuration)
 				if Flag.Type == "ColorPicker" then
 					changed = true
 					Flag:Set(UnpackColor(FlagValue))
+					_G[FlagName] = UnpackColor(FlagValue) -- lưu vào _G
 				else
 					if (Flag.Default or Flag.CurrentKeybind or Flag.CurrentOption or Flag.Color) ~= FlagValue then 
 						changed = true
 						Flag:Set(FlagValue) 	
+						_G[FlagName] = FlagValue -- lưu vào _G
 					end
 				end
 			end)
 		else
 			warn("Rayfield | Unable to find '"..FlagName.. "' in the save file.")
 			print("The error above may not be an issue if new elements have been added or not been set values.")
-			--RayfieldLibrary:Notify({Title = "Rayfield Flags", Content = "Rayfield was unable to find '"..FlagName.. "' in the save file. Check sirius.menu/discord for help.", Image = 3944688398})
 		end
 	end
 
